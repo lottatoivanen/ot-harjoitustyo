@@ -1,6 +1,6 @@
 # Ohjelmistotekniikka harjoitustyö
 
-Teen harjoitustyönä sovelluksen.
+Teen __ harjoitustyönä__ _sovelluksen_.
 
 ## Laskarit
 
