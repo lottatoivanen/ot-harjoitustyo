@@ -15,6 +15,10 @@ class TestMaksukortti(unittest.TestCase):
         self.maksukortti.lataa_rahaa(250)
         self.assertEqual(self.maksukortti.saldo_euroina(), 12.50)
     
+    def test_lataa_rahaa_ei_muuta_saldoa_negatiivisella_arvolla(self):
+        self.maksukortti.lataa_rahaa(-250)
+        self.assertEqual(self.maksukortti.saldo_euroina(), 10.00)
+
     def test_ota_rahaa_vahentaa_saldoa_oikein(self):
         self.maksukortti.ota_rahaa(250)
         self.assertEqual(self.maksukortti.saldo_euroina(), 7.50)
