@@ -1,6 +1,8 @@
 # Ohjelmistotekniikka harjoitustyö
 
-Teen __harjoitustyönä__ _sovelluksen_.
+Teen harjoitustyönä sovelluksen __musikaali- ja näytelmäprojektien__ hallintaan ja _harjoitusten seurantaan_.
+
+## Dokumentaatio
 
 ## Laskarit
 
