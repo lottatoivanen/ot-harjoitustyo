@@ -1,3 +1,5 @@
+### HSL-matkakorttien hallinta
+
 ```mermaid
  sequenceDiagram
     participant main
@@ -9,7 +11,7 @@
     participant kallen_kortti
 
     main ->> laitehallinto: HKLLaitehallinto()
-    laitehallinto -->> main
+    laitehallinto -->> main: 
     main ->> rautatietori: Lataajalaite()
     main ->> ratikka6: Lukijalaite()
     main ->> bussi244: Lukijalaite()
