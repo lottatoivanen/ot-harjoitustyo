@@ -5,7 +5,4 @@ Teen harjoitustyönä sovelluksen __musikaali- ja näytelmäprojektien__ hallint
 ## Dokumentaatio
 - [vaatimuusmäärittely](https://github.com/lottatoivanen/ot-harjoitustyo/blob/025d6090bd9bf1f0e2158418af5e64a8f44c009f/dokumentaatio/vaatimuusmaarittely.md)
 - [työaikakirjanpito](https://github.com/lottatoivanen/ot-harjoitustyo/blob/025d6090bd9bf1f0e2158418af5e64a8f44c009f/dokumentaatio/tyoaikakirjanpito.md)
-
-## Laskarit
-
-[laskarit-kansio](https://github.com/lottatoivanen/ot-harjoitustyo/tree/ab4e8300e7b6634d268bf39e38c035ad3caae50c/laskarit)
+- [changelog](https://github.com/lottatoivanen/ot-harjoitustyo/blob/dfc90e03baeaa4ca9728265deacebdd4fa5f5d8e/projekti-sovellus/dokumentaatio/changelog.md)
