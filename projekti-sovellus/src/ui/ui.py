@@ -24,3 +24,9 @@ class UI:
             self.on_project_added
         )
         self._current_view.pack()
+    
+    def on_project_selected(self, project):
+        print(f"Valittu projekti: {project}")
+    
+    def on_project_added(self, project):
+        print(f"Lisätty projekti: {project}")
