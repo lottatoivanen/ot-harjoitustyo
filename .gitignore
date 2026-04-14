@@ -9,6 +9,6 @@ htmlcov
 
 # data files
 data/database.sqlite
-data/todos.csv
+data/projects.csv
 data/test-database.sqlite
-data/test-todos.csv
+data/test-projects.csv
