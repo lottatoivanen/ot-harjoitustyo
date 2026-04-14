@@ -1,0 +1,41 @@
+from entities.user import User
+from database_connection import get_database_connection
+
+def get_user_by_row(row):
+    return User(row["username"], row["password"]) if row else None
+
+class UserRepository:
+    """Käyttäjätietojen tallentamisesta ja hakemisesta vastaava luokka."""
+
+    def __init__(self):
+        self._connection = get_database_connection()
+
+    def find_all(self):
+        cursor = self._connection.cursor()
+        cursor.execute(
+            "SELECT * FROM users"
+        )
+        rows = cursor.fetchall()
+        return list(map(get_user_by_row, rows))
+
+    def find_user_by_username(self, username):
+        cursor = self._connection.cursor()
+        cursor.execute(
+            "SELECT username, password FROM users WHERE username = ?",
+            (username,)
+        )
+        row = cursor.fetchone()
+        if row:
+            return User(username=row[0], password=row[1])
+        return None
+
+    def create(self, user):
+        cursor = self._connection.cursor()
+        cursor.execute(
+            "INSERT INTO users (username, password) VALUES (?, ?)",
+            (user.username, user.password)
+        )
+        self._connection.commit()
+        return user
+
+user_repository = UserRepository()
