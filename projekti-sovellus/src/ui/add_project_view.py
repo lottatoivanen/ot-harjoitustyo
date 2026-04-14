@@ -24,7 +24,7 @@ class AddProjectView:
         
         label = ttk.Label(
             master=self._frame,
-            text="Lisää projekti:",
+            text="Add project:",
             font=("Arial", 12)
         )
         label.grid(row=0, column=0, padx=5, pady=5, sticky=constants.W)
@@ -33,14 +33,14 @@ class AddProjectView:
 
         add_button = ttk.Button(
             master=self._frame,
-            text="Lisää",
+            text="Add",
             command=self._add_project
         )
         add_button.grid(row=1, column=0, padx=5, pady=5, sticky=constants.W)
 
         cancel_button = ttk.Button(
             master=self._frame,
-            text="Peruuta",
+            text="Cancel",
             command=self._handle_cancel
         )
         cancel_button.grid(row=1, column=1, padx=5, pady=5, sticky=constants.E)

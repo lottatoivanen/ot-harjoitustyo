@@ -38,7 +38,7 @@ class MainView:
 
         header = ttk.Label(
             master=self._current_view,
-            text="Projektit",
+            text="Projects",
             font=("Arial", 16)
         )
         header.pack(anchor="w", padx=5, pady=5)
@@ -52,7 +52,7 @@ class MainView:
 
         add_button = ttk.Button(
             master=self._current_view,
-            text="Lisää projekti",
+            text="Add project",
             command=self._show_add_project_view
         )
         add_button.pack(anchor="e", padx=5, pady=5)

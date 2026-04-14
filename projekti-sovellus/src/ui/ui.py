@@ -26,7 +26,7 @@ class UI:
             self.on_project_added
         )
         self._current_view.pack()
-    
+
     def show_login_view(self):
         self.clear_view()
         self._current_view = LoginView(
@@ -35,7 +35,7 @@ class UI:
             self.show_register_view
         )
         self._current_view.pack()
-    
+
     def show_register_view(self):
         self.clear_view()
         self._current_view = RegisterView(
@@ -44,9 +44,9 @@ class UI:
             self.show_login_view
         )
         self._current_view.pack()
-    
+
     def on_project_selected(self, project):
         print(f"Valittu projekti: {project}")
-    
+
     def on_project_added(self, project):
         print(f"Lisätty projekti: {project}")
