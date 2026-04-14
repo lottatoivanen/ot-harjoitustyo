@@ -1,5 +1,7 @@
+import tkinter as tk
 from tkinter import ttk, constants
 from ui.project_list_view import ProjectListView
+from ui.add_project_view import AddProjectView
 
 class MainView:
     """Projektien listauksesta ja lisäämisestä vastaava näkymä."""
@@ -13,6 +15,7 @@ class MainView:
         self._project_list_frame = None
         self._project_list_view = None
         self._create_project_entry = None
+        self._current_view = None
 
         self._initialize()
 
@@ -21,78 +24,63 @@ class MainView:
 
     def destroy(self):
         self._frame.destroy()
+    
+    def _clear_view(self):
+        if self._current_view:
+            self._current_view.destroy()
+            self._current_view = None
+    
+    def _show_projects_view(self):
+        self._clear_view()
 
-    def _initialize_header(self):
-        label = ttk.Label(
-            master=self._frame,
+        self._current_view = ttk.Frame(master=self._content_frame)
+        self._current_view.pack(fill=constants.BOTH, expand=True)
+
+        header = ttk.Label(
+            master=self._current_view,
             text="Projektit",
             font=("Arial", 16)
         )
-        label.grid(row=0, column=0, padx=5, pady=5, sticky=constants.W)
-
-    def _handle_create_project(self):
-        project_name = self._create_project_entry.get().strip()
-
-        if not project_name:
-            return
-        if project_name in self._projects:
-            return
-
-        self._projects.append(project_name)
-        self._initialize_project_list()
-        self._create_project_entry.delete(0, constants.END)
-        self._handle_project_add(project_name)
-
-    def _initialize_footer(self):
-        self._create_project_entry = ttk.Entry(master=self._frame)
-
-        add_button = ttk.Button(
-            master=self._frame,
-            text="Lisää projekti",
-            command=self._handle_create_project
-        )
-
-        self._create_project_entry.grid(
-            row=2,
-            column=0,
-            padx=5,
-            pady=5,
-            sticky=constants.EW
-        )
-
-        add_button.grid(
-            row=2,
-            column=1,
-            padx=5,
-            pady=5,
-            sticky=constants.EW
-        )
-
-    def _initialize_project_list(self):
-        if self._project_list_view:
-            self._project_list_view.destroy()
+        header.pack(anchor="w", padx=5, pady=5)
 
         self._project_list_view = ProjectListView(
-            self._project_list_frame,
+            self._current_view,
             self._projects,
             self._handle_project_select
         )
-        self._project_list_view.pack()
+        self._project_list_view.render()
+
+        add_button = ttk.Button(
+            master=self._current_view,
+            text="Lisää projekti",
+            command=self._show_add_project_view
+        )
+        add_button.pack(anchor="e", padx=5, pady=5)
+
+    def _show_add_project_view(self):
+        self._clear_view()
+
+        self._current_view = AddProjectView(
+            root=self._content_frame,
+            handle_project_add=self._handle_project_add_and_return,
+            handle_cancel=self._show_projects_view
+        )
+        self._current_view.grid()
+
+    def _handle_project_add_and_return(self, project_name):
+        project_name = project_name.strip()
+        if project_name and project_name not in self._projects:
+            self._projects.append(project_name)
+            self._handle_project_add(project_name)
+
+        self._show_projects_view()
 
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
-        self._project_list_frame = ttk.Frame(master=self._frame)
 
-        self._initialize_header()
-        self._initialize_project_list()
-        self._initialize_footer()
+        # A single container for all subviews
+        self._content_frame = ttk.Frame(master=self._frame)
+        self._content_frame.pack(fill=constants.BOTH, expand=True)
 
-        self._project_list_frame.grid(
-            row=1,
-            column=0,
-            columnspan=2,
-            sticky=constants.EW
-        )
-
-        self._frame.grid_columnconfigure(0, weight=1, minsize=400)
-        self._frame.grid_columnconfigure(1, weight=0)
+        # Show default view
+        self._show_projects_view()

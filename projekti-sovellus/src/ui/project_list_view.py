@@ -11,8 +11,8 @@ class ProjectListView:
 
         self._initialize()
 
-    def pack(self):
-        self._frame.pack(fill=constants.X)
+    def render(self):
+        self._frame.pack(fill="both", expand=True)
 
     def destroy(self):
         self._frame.destroy()

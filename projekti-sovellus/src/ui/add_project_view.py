@@ -1,0 +1,51 @@
+import tkinter as tk
+from tkinter import ttk, constants
+
+class AddProjectView:
+    """Näkymä, joka mahdollistaa uuden projektin lisäämisen."""
+
+    def __init__(self, root, handle_project_add, handle_cancel):
+        self._root = root
+        self._handle_project_add = handle_project_add
+        self._handle_cancel = handle_cancel
+        self._frame = None
+        self._project_name_entry = None
+
+        self._initialize()
+
+    def grid(self):
+        self._frame.grid(sticky=constants.EW)
+
+    def destroy(self):
+        self._frame.destroy()
+
+    def _initialize(self):
+        self._frame = ttk.Frame(master=self._root)
+        
+        label = ttk.Label(
+            master=self._frame,
+            text="Lisää projekti:",
+            font=("Arial", 12)
+        )
+        label.grid(row=0, column=0, padx=5, pady=5, sticky=constants.W)
+        self._project_name_entry = ttk.Entry(master=self._frame)
+        self._project_name_entry.grid(row=0, column=1, padx=5, pady=5, sticky=constants.EW)
+
+        add_button = ttk.Button(
+            master=self._frame,
+            text="Lisää",
+            command=self._add_project
+        )
+        add_button.grid(row=1, column=0, padx=5, pady=5, sticky=constants.W)
+
+        cancel_button = ttk.Button(
+            master=self._frame,
+            text="Peruuta",
+            command=self._handle_cancel
+        )
+        cancel_button.grid(row=1, column=1, padx=5, pady=5, sticky=constants.E)
+    
+    def _add_project(self):
+        project_name = self._project_name_entry.get().strip()
+        if project_name:
+            self._handle_project_add(project_name)
