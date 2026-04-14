@@ -1,16 +1,18 @@
 from entities.project import Project
+from repositories.project_repository import project_repository as default_project_repository
 
 class ProjectService:
     """Projektien hallinnasta vastaava luokka, joka toimii sovelluksen logiikkakerroksessa."""
-    def __init__(self):
-        self._projects = []
 
-    def create_project(self, name, description, user):
-        """Luo uuden projektin ja lisää sen projektien listaan."""
-        project = Project(name, description, user)
-        self._projects.append(project)
-        return project
+    def __init__(self, project_repository=default_project_repository):
+        self._user = None
+        self._project_repository = project_repository
 
-    def get_all_projects(self):
-        """Palauttaa listan kaikista projekteista."""
-        return self._projects
+    def create_project(self, name, description):
+        project = Project(name=name, description=description, user=self._user)
+        return self._project_repository.create(project)
+
+    def get_projects(self):
+        if self._user:
+            return self._project_repository.find_by_username(self._user.username)
+        return self._project_repository.find_all()
