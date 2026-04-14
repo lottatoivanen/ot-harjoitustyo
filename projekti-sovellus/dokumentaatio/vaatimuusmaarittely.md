@@ -11,15 +11,15 @@ Sovelluksen alkuvaiheessa on yksi käyttäjärooli. Myöhemmin sovellukseen saat
 ## Perusversion tarjoama toiminnallisuus
 
 ### Ennen kirjautumista
-- Käyttäjä voi luoda sovellukseen käyttäjätunnuksen.
-    - Käyttäjätunnuksen täytyy olla uniikki ja vähintään 4 merkkiä pitkä.
-    - Salasanan täytyy olla vähintään 6 merkkiä pitkä.
-- Käyttäjä voi kirjautua järjestelmään.
-    - Kirjautuminen onnistuu vain jo olemassa olevalla käyttäjätunnuksella ja salasanalla.
-    - Jos käyttäjätunnusta ei ole olemassa tai salasana ei täsmää, järjestelmä näyttää virheilmoituksen.
+- Käyttäjä voi luoda sovellukseen käyttäjätunnuksen. TEHTY
+    - Käyttäjätunnuksen täytyy olla uniikki ja vähintään 4 merkkiä pitkä. TEHTY
+    - Salasanan täytyy olla vähintään 6 merkkiä pitkä. TEHTY
+- Käyttäjä voi kirjautua järjestelmään. TEHTY
+    - Kirjautuminen onnistuu vain jo olemassa olevalla käyttäjätunnuksella ja salasanalla. TEHTY
+    - Jos käyttäjätunnusta ei ole olemassa tai salasana ei täsmää, järjestelmä näyttää virheilmoituksen. TEHTY
 
 ### Kirjautumisen jälkeen
-- Käyttäjä näkee omat projektinsa.
+- Käyttäjä näkee omat projektinsa. TEHTY
 - Käyttäjä voi luoda ja poistaa projekteja.
 - Käyttäjä voi lisätä harjoituksia, roolilistoja ja muistutuksia projekteihin.
 - Käyttäjä voi kirjautua ulos järjestelmästä.
