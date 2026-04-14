@@ -27,3 +27,29 @@ poetry run invoke build
 ```bash
 poetry run invoke start
 ```
+
+## Komentorivitoiminnot
+
+### Testaus
+
+Testaaminen toimii komennolla
+
+```bash
+poetry run invoke test
+```
+
+### Testikattavuus
+
+Testikattavuus raportin voi generoida _htmlcov_-hakemistoon komennolla
+
+```bash
+poetry run invoke coverage-report
+```
+
+### Pylint
+
+Tiedoston [.pylintrc](./.pylintrc) määrittelemät tarkistukset voi suorittaa komennolla:
+
+```bash
+poetry run invoke lint
+```
