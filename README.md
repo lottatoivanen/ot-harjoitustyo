@@ -48,7 +48,7 @@ poetry run invoke coverage-report
 
 ### Pylint
 
-Tiedoston [.pylintrc](./.pylintrc) määrittelemät tarkistukset voi suorittaa komennolla:
+Tiedoston [.pylintrc](https://github.com/lottatoivanen/ot-harjoitustyo/blob/b1eb2f63f51b003513c2d8734d63dfa0bc50cf77/projekti-sovellus/.pylintrc) määrittelemät tarkistukset voi suorittaa komennolla:
 
 ```bash
 poetry run invoke lint
