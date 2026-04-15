@@ -1,6 +1,8 @@
 from ui.main_view import MainView
 from ui.login_view import LoginView
 from ui.register_view import RegisterView
+from ui.add_project_view import AddProjectView
+from ui.project_view import ProjectView
 
 class UI:
     """Sovelluksen pääkäyttöliittymä, joka sisältää päävalikon ja projektinäkymän."""
@@ -22,8 +24,8 @@ class UI:
         self._current_view = MainView(
             self._root,
             self._projects,
-            self.on_project_selected,
-            self.on_project_added
+            handle_project_select=None,
+            handle_project_add=None
         )
         self._current_view.pack()
 
@@ -44,9 +46,3 @@ class UI:
             self.show_login_view
         )
         self._current_view.pack()
-
-    def on_project_selected(self, project):
-        print(f"Valittu projekti: {project}")
-
-    def on_project_added(self, project):
-        print(f"Lisätty projekti: {project}")

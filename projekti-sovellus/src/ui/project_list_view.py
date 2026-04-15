@@ -19,11 +19,11 @@ class ProjectListView:
 
     def _initialize_project_item(self, project):
         item_frame = ttk.Frame(master=self._frame)
-        label = ttk.Label(master=item_frame, text=project)
+        label = ttk.Label(master=item_frame, text=project.name)
 
         select_button = ttk.Button(
             master=item_frame,
-            text="Valitse",
+            text="Open",
             command=lambda: self._handle_project_select(project)
         )
 

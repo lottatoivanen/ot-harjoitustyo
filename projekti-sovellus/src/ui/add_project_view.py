@@ -22,30 +22,45 @@ class AddProjectView:
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
         
-        label = ttk.Label(
+        name_label = ttk.Label(
             master=self._frame,
             text="Add project:",
             font=("Arial", 12)
         )
-        label.grid(row=0, column=0, padx=5, pady=5, sticky=constants.W)
+        name_label.grid(row=0, column=0, padx=5, pady=5, sticky=constants.W)
         self._project_name_entry = ttk.Entry(master=self._frame)
         self._project_name_entry.grid(row=0, column=1, padx=5, pady=5, sticky=constants.EW)
+
+        desc_label = ttk.Label(
+            master=self._frame,
+            text="Desciption:",
+            font=("Arial, 12")
+        )
+        desc_label.grid(row=1, column=0, padx=5, pady=5, sticky=constants.W)
+        self._project_desc_entry = tk.Text(
+            master=self._frame,
+            height=5,
+            width=40
+            )
+        self._project_desc_entry.grid(row=1, column=1, padx=5, pady=5, sticky=constants.EW)
 
         add_button = ttk.Button(
             master=self._frame,
             text="Add",
             command=self._add_project
         )
-        add_button.grid(row=1, column=0, padx=5, pady=5, sticky=constants.W)
+        add_button.grid(row=4, column=0, padx=5, pady=5, sticky=constants.W)
 
         cancel_button = ttk.Button(
             master=self._frame,
             text="Cancel",
             command=self._handle_cancel
         )
-        cancel_button.grid(row=1, column=1, padx=5, pady=5, sticky=constants.E)
+        cancel_button.grid(row=4, column=1, padx=5, pady=5, sticky=constants.E)
+        self._frame.grid_columnconfigure(1, weight=1)
     
     def _add_project(self):
         project_name = self._project_name_entry.get().strip()
+        project_desc = self._project_desc_entry.get("1.0", "end").strip()
         if project_name:
-            self._handle_project_add(project_name)
+            self._handle_project_add(project_name, project_desc)

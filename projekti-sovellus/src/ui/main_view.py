@@ -2,6 +2,10 @@ import tkinter as tk
 from tkinter import ttk, constants
 from ui.project_list_view import ProjectListView
 from ui.add_project_view import AddProjectView
+from ui.project_view import ProjectView
+from entities.project import Project
+from services.project_service import project_service
+from services.user_service import user_service
 
 class MainView:
     """Projektien listauksesta ja lisäämisestä vastaava näkymä."""
@@ -46,7 +50,7 @@ class MainView:
         self._project_list_view = ProjectListView(
             self._current_view,
             self._projects,
-            self._handle_project_select
+            self._show_project_view
         )
         self._project_list_view.render()
 
@@ -56,6 +60,17 @@ class MainView:
             command=self._show_add_project_view
         )
         add_button.pack(anchor="e", padx=5, pady=5)
+    
+    def _show_project_view(self, project):
+        self._clear_view()
+
+        self._current_view = ProjectView(
+            root=self._content_frame,
+            project=project,
+            handle_back=self._show_projects_view
+        )
+
+        self._current_view.grid()
 
     def _show_add_project_view(self):
         self._clear_view()
@@ -67,20 +82,21 @@ class MainView:
         )
         self._current_view.grid()
 
-    def _handle_project_add_and_return(self, project_name):
+    def _handle_project_add_and_return(self, project_name, project_desc):
         project_name = project_name.strip()
-        if project_name and project_name not in self._projects:
-            self._projects.append(project_name)
-            self._handle_project_add(project_name)
+        project_desc = project_desc.strip()
+        if not project_name:
+            return
+        if self._handle_project_add:
+            new_project = self._handle_project_add(project_name, project_desc)
+        else:
+            new_project = Project(name=project_name, description=project_desc, user=None)
+        self._projects.append(new_project)
 
         self._show_projects_view()
 
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
-
-        # A single container for all subviews
         self._content_frame = ttk.Frame(master=self._frame)
         self._content_frame.pack(fill=constants.BOTH, expand=True)
-
-        # Show default view
         self._show_projects_view()
