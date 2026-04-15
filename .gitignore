@@ -8,7 +8,7 @@ htmlcov
 *$py.class
 
 # data files
-data/database.sqlite
-data/projects.csv
-data/test-database.sqlite
-data/test-projects.csv
+projekti-sovellus/data/database.sqlite
+projekti-sovellus/data/projects.csv
+projekti-sovellus/data/test-database.sqlite
+projekti-sovellus/data/test-projects.csv
