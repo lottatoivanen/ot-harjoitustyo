@@ -10,7 +10,7 @@ class FakeProjectRepository:
 
     def find_all(self):
         return self.projects
-    
+
     def find_by_username(self, username):
         return [project for project in self.projects if project.user and project.user.username == username]
 
@@ -21,10 +21,10 @@ class FakeProjectRepository:
 class FakeUserRepository:
     def __init__(self):
         self.users = []
-    
+
     def find_all(self):
         return self.users
-    
+
     def find_user_by_username(self, username):
         for user in self.users:
             if user.username == username:
@@ -60,16 +60,16 @@ class TestUserService(unittest.TestCase):
     def setUp(self):
         self.user_service = UserService(FakeUserRepository())
         self.user_service.create_user("muumimamma", "muumilaakso1")
-    
+
     def test_create_user_accepted(self):
         user = self.user_service.create_user("muumipappa", "muumilaakso2")
         self.assertEqual(user.username, "muumipappa")
         self.assertEqual(user.password, "muumilaakso2")
-    
+
     def test_username_already_exists(self):
         with self.assertRaises(UsernameAlreadyExistsError):
             self.user_service.create_user("muumimamma", "salasana1")
-    
+
     def test_login_existing_user(self):
         user = self.user_service.login("muumimamma", "muumilaakso1")
         self.assertEqual(user.username, "muumimamma")

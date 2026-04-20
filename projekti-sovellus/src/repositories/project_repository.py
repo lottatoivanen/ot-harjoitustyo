@@ -1,59 +1,66 @@
 from pathlib import Path
 from entities.project import Project
 from repositories.user_repository import user_repository
-from config import PROJECTS_FILE_PATH
+from database_connection import get_database_connection
+
+def get_project_by_row(row):
+    if row:
+        project_id = row[0]
+        name = row[1]
+        description = row[2]
+        username = row[3]
+        user = user_repository.find_user_by_username(username) if username else None
+        return Project(project_id=project_id, name=name, description=description, user=user)
+    return None
 
 class ProjectRepository:
     """Vastaa projektien tietokantaoperaatioista."""
 
-    def __init__(self):
-        self._file_path = PROJECTS_FILE_PATH
+    def __init__(self, connection):
+        self._connection = connection
 
     def find_all(self):
-        return self._read()
+        cursor = self._connection.cursor()
+        cursor.execute(
+            "SELECT id, name, description, username FROM projects"
+        )
+        rows = cursor.fetchall()
+        projects = []
+        for row in rows:
+            project = get_project_by_row(row)
+            if project:
+                projects.append(project)
+        return projects
 
     def find_by_username(self, username):
-        projects = self._read()
-        user_projects = filter(lambda p: p.user and p.user.username == username, projects)
-        return list(user_projects)
+        cursor = self._connection.cursor()
+        cursor.execute(
+            "SELECT id, name, description, username FROM projects WHERE username = ?",
+            (username,)
+        )
+        rows = cursor.fetchall()
+        projects = []
+        for row in rows:
+            project = get_project_by_row(row)
+            if project:
+                projects.append(project)
+        return projects
 
     def create(self, project):
-        projects = self._read()
-        projects.append(project)
-        self._write(projects)
+        cursor = self._connection.cursor()
+        cursor.execute(
+            "INSERT INTO projects (name, description, username) VALUES (?, ?, ?)",
+            (project.name, project.description, project.user.username if project.user else None)
+        )
+        self._connection.commit()
         return project
 
     def delete(self, project_id):
-        projects = self._read()
-        projects_without_id = filter(lambda p: p.id != project_id, projects)
-        self._write(projects_without_id)
+        cursor = self._connection.cursor()
+        cursor.execute(
+            "DELETE FROM projects WHERE id = ?",
+            (project_id,)
+        )
+        self._connection.commit()
 
-    def _ensure_file_exists(self):
-        Path(self._file_path).touch()
-
-    def _read(self):
-        projects = []
-        self._ensure_file_exists()
-        with open(self._file_path, "r", encoding="utf-8") as file:
-            for line in file:
-                line = line.replace("\n", "")
-                parts = line.split(";")
-                project_id = parts[0]
-                name = parts[1]
-                description = parts[2]
-                username = parts[3]
-                user = user_repository.find_user_by_username(username) if username else None
-                projects.append(
-                    Project(project_id=project_id, name=name, description=description, user=user)
-                    )
-        return projects
-
-    def _write(self, projects):
-        self._ensure_file_exists()
-        with open(self._file_path, "w", encoding="utf-8") as file:
-            for project in projects:
-                user_part = project.user.username if project.user else ""
-                line = f"{project.id};{project.name};{project.description};{user_part}\n"
-                file.write(line)
-
-project_repository = ProjectRepository()
+project_repository = ProjectRepository(get_database_connection())

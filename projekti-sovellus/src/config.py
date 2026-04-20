@@ -8,8 +8,5 @@ try:
 except FileNotFoundError:
     print("Varoitus: .env-tiedostoa ei löydy. Varmista, että se on luotu projektin juurikansioon.")
 
-PROJECTS_FILENAME = os.getenv("PROJECT_FILENAME") or "projects.csv"
-PROJECTS_FILE_PATH = os.path.join(dirname, "..", "data", PROJECTS_FILENAME)
-
 DATABASE_FILENAME = os.getenv("DATABASE_FILENAME") or "database.sqlite"
 DATABASE_FILE_PATH = os.path.join(dirname, "..", "data", DATABASE_FILENAME)

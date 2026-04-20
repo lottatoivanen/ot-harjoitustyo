@@ -7,8 +7,8 @@ def get_user_by_row(row):
 class UserRepository:
     """Käyttäjätietojen tallentamisesta ja hakemisesta vastaava luokka."""
 
-    def __init__(self):
-        self._connection = get_database_connection()
+    def __init__(self, connection):
+        self._connection = connection
 
     def find_all(self):
         cursor = self._connection.cursor()
@@ -38,4 +38,4 @@ class UserRepository:
         self._connection.commit()
         return user
 
-user_repository = UserRepository()
+user_repository = UserRepository(get_database_connection())

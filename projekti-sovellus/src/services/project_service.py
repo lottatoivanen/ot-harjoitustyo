@@ -16,3 +16,8 @@ class ProjectService:
         if self._user:
             return self._project_repository.find_by_username(self._user.username)
         return self._project_repository.find_all()
+
+    def get_projects_for_user(self, user):
+        return self._project_repository.find_by_username(user.username)
+
+project_service = ProjectService()

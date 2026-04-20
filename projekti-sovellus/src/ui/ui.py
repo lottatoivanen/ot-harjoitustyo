@@ -3,6 +3,8 @@ from ui.login_view import LoginView
 from ui.register_view import RegisterView
 from ui.add_project_view import AddProjectView
 from ui.project_view import ProjectView
+from services.project_service import project_service
+from services.user_service import user_service
 
 class UI:
     """Sovelluksen pääkäyttöliittymä, joka sisältää päävalikon ja projektinäkymän."""
@@ -21,11 +23,13 @@ class UI:
 
     def show_projects_view(self):
         self.clear_view()
+        project_service._user = user_service.get_current_user()
+        self._projects = project_service.get_projects()
         self._current_view = MainView(
             self._root,
             self._projects,
             handle_project_select=None,
-            handle_project_add=None
+            handle_project_add=project_service.create_project
         )
         self._current_view.pack()
 

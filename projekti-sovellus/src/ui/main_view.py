@@ -15,6 +15,7 @@ class MainView:
         self._projects = projects
         self._handle_project_select = handle_project_select
         self._handle_project_add = handle_project_add
+        self._user = user_service.get_current_user()
         self._frame = None
         self._project_list_frame = None
         self._project_list_view = None
