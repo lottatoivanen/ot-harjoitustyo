@@ -17,7 +17,7 @@ class RegisterView:
         self._initialize()
     
     def pack(self):
-        self._frame.pack(fill=constants.X)
+        self._frame.pack(fill=constants.Y)
     
     def destroy(self):
         self._frame.destroy()

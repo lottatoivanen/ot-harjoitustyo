@@ -1,8 +1,6 @@
 from ui.main_view import MainView
 from ui.login_view import LoginView
 from ui.register_view import RegisterView
-from ui.add_project_view import AddProjectView
-from ui.project_view import ProjectView
 from services.project_service import project_service
 from services.user_service import user_service
 

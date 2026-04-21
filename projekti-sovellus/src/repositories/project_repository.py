@@ -62,5 +62,13 @@ class ProjectRepository:
             (project_id,)
         )
         self._connection.commit()
+    
+    def update(self, project):
+        cursor = self._connection.cursor()
+        cursor.execute(
+            "UPDATE projects SET name = ?, description = ? WHERE id = ?",
+            (project.name, project.description, project.id)
+        )
+        self._connection.commit()
 
 project_repository = ProjectRepository(get_database_connection())

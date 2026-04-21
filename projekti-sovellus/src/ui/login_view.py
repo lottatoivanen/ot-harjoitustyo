@@ -14,7 +14,7 @@ class LoginView:
         self._initialize()
 
     def pack(self):
-        self._frame.pack(fill=constants.X)
+        self._frame.pack(fill=constants.Y)
 
     def destroy(self):
         self._frame.destroy()
@@ -42,22 +42,22 @@ class LoginView:
         self._username_entry = ttk.Entry(master=self._frame)
 
         username_label.grid(row=0, column=0, padx=5, pady=5, sticky=constants.W)
-        self._username_entry.grid(row=0, column=1, padx=5, pady=5, sticky=constants.EW)
+        self._username_entry.grid(row=1, column=0, padx=5, pady=5, sticky=constants.EW)
 
     def _initialize_password_field(self):
         password_label = ttk.Label(master=self._frame, text="Password:")
 
         self._password_entry = ttk.Entry(master=self._frame, show="*")
 
-        password_label.grid(row=1, column=0, padx=5, pady=5, sticky=constants.W)
-        self._password_entry.grid(row=1, column=1, padx=5, pady=5, sticky=constants.EW)
+        password_label.grid(row=2, column=0, padx=5, pady=5, sticky=constants.W)
+        self._password_entry.grid(row=3, column=0, padx=5, pady=5, sticky=constants.EW)
     
     def _initialize_error_label(self):
         self._error_variable = StringVar(self._frame)
         self._error_label = ttk.Label(
             master=self._frame, textvariable=self._error_variable, foreground="red"
             )
-        self._error_label.grid(row=3, column=0, columnspan=2, padx=5, pady=5)
+        self._error_label.grid(row=4, column=0, columnspan=2, padx=5, pady=5)
         self._hide_error()
 
     def _initialize(self):
@@ -71,10 +71,10 @@ class LoginView:
             master=self._frame, text="Login", command=self._login_handler
             )
         not_user_label = ttk.Label(master=self._frame, text="Do you not have an account yet?")
-        not_user_label.grid(row=5, column=1, padx=5, pady=5, sticky=constants.W)
+        not_user_label.grid(row=5, column=0, padx=5, pady=5, sticky=constants.W)
         create_user_button = ttk.Button(
             master=self._frame, text="Register as user", command=self._handle_show_register
             )
 
-        show_login_button.grid(row=4, column=1, padx=5, pady=5, sticky=constants.EW)
-        create_user_button.grid(row=6, column=1, padx=5, pady=5, sticky=constants.EW)
+        show_login_button.grid(row=4, column=0, padx=5, pady=5, sticky=constants.EW)
+        create_user_button.grid(row=6, column=0, padx=5, pady=5, sticky=constants.EW)
