@@ -11,11 +11,12 @@ from repositories.project_repository import project_repository
 class MainView:
     """Projektien listauksesta ja lisäämisestä vastaava näkymä."""
 
-    def __init__(self, root, projects, handle_project_select, handle_project_add):
+    def __init__(self, root, projects, handle_project_select, handle_project_add, handle_logout):
         self._root = root
         self._projects = projects
         self._handle_project_select = handle_project_select
         self._handle_project_add = handle_project_add
+        self._handle_logout = handle_logout
         self._user = user_service.get_current_user()
         self._frame = None
         self._project_list_frame = None
@@ -62,6 +63,13 @@ class MainView:
             command=self._show_add_project_view
         )
         add_button.pack(anchor="w", padx=5, pady=5)
+
+        logout_button = ttk.Button(
+            master=self._current_view,
+            text="Logout",
+            command=self._handle_logout
+        )
+        logout_button.pack(anchor="ne", padx=5, pady=5)
     
     def _show_project_view(self, project):
         self._clear_view()
@@ -71,7 +79,7 @@ class MainView:
             project=project,
             handle_back=self._show_projects_view,
             handle_delete=self._delete_project,
-            handle_edit=self._edit_project
+            handle_edit=self._edit_project,
         )
 
         self._current_view.pack()

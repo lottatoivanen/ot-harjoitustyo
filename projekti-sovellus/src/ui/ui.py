@@ -27,7 +27,8 @@ class UI:
             self._root,
             self._projects,
             handle_project_select=None,
-            handle_project_add=project_service.create_project
+            handle_project_add=project_service.create_project,
+            handle_logout=self.logout
         )
         self._current_view.pack()
 
@@ -48,3 +49,7 @@ class UI:
             self.show_login_view
         )
         self._current_view.pack()
+    
+    def logout(self):
+        user_service.logout()
+        self.show_login_view()
