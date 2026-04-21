@@ -1,4 +1,3 @@
-from pathlib import Path
 from entities.project import Project
 from repositories.user_repository import user_repository
 from database_connection import get_database_connection
@@ -62,7 +61,7 @@ class ProjectRepository:
             (project_id,)
         )
         self._connection.commit()
-    
+
     def update(self, project):
         cursor = self._connection.cursor()
         cursor.execute(
