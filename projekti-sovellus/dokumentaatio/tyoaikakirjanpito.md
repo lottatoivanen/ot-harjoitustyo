@@ -7,5 +7,9 @@
 | 31.3. | 2    | toiminnallisuuden jatkaminen ja ensimmäisen testin lisääminen |
 | 8.4.  | 2,5  | tietokantatiedostojen käyttöönoton aloitus ja toiminnallisuuden korjaaminen |
 | 9.4.  | 1,5  | rekisteröitymisen ja kirjautumisen lisääminen toiminnallisuuteen |
-| 13.4. | 4    | uuden rekisteröitymis ja kirjautumis toiminnallisuuden viimeistely, pylintin lisäys ja koodin laadun korjaaminen |
+| 13.4. | 4    | uuden rekisteröitymis- ja kirjautumistoiminnallisuuden viimeistely, pylintin lisäys ja koodin laadun korjaaminen |
 | 14.4. | 2,5  | uusien testien lisäys, ohjelman rakenteen laatiminen luokka- ja pakkauskaavioiksi sekä työnetenemisen dokumentaatio |
+| 17.4. | 3    | tietokanta toiminnallisuuden viimeistely |
+| 20.4. | 5    | projektien poistamisen ja muokkaamisen lisääminen toiminnallisuuteen|
+| 21.4. | 2,5  | ulos kirjautumisen lisääminen toiminnallisuuteen, dokumentaation päivitys sekä sekvenssikaavioiden lisäys päätoiminnallisuudesta |
+
