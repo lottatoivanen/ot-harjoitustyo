@@ -6,10 +6,10 @@ Teen harjoitustyönä sovelluksen __musikaali- ja näytelmäprojektien__ hallint
 [Viikko 5 release](../../releases/latest)
 
 ## Dokumentaatio
-- [vaatimuusmäärittely](dokumentaatio/vaatimuusmaarittely.md)
-- [työaikakirjanpito](dokumentaatio/tyoaikakirjanpito.md)
-- [changelog](dokumentaatio/changelog.md)
-- [arkkitehtuurikuvaus](dokumentaatio/arkkitehtuuri.md)
+- [vaatimuusmäärittely](projekti-sovellus/dokumentaatio/vaatimuusmaarittely.md)
+- [työaikakirjanpito](projekti-sovellus/dokumentaatio/tyoaikakirjanpito.md)
+- [changelog](projekti-sovellus/dokumentaatio/changelog.md)
+- [arkkitehtuurikuvaus](projekti-sovellus/dokumentaatio/arkkitehtuuri.md)
 
 ## Asennus
 1. Siirry kansioon projekti-sovellus
