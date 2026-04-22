@@ -31,7 +31,7 @@ class LoginView:
 
     def _show_error(self, message):
         self._error_variable.set(message)
-        self._error_label.grid(row=3, column=0, columnspan=2, padx=5, pady=5)
+        self._error_label.grid(row=4, column=0, columnspan=2, padx=5, pady=5)
 
     def _hide_error(self):
         self._error_label.grid_remove()
@@ -71,10 +71,10 @@ class LoginView:
             master=self._frame, text="Login", command=self._login_handler
             )
         not_user_label = ttk.Label(master=self._frame, text="Do you not have an account yet?")
-        not_user_label.grid(row=5, column=0, padx=5, pady=5, sticky=constants.W)
+        not_user_label.grid(row=6, column=0, padx=5, pady=5, sticky=constants.W)
         create_user_button = ttk.Button(
             master=self._frame, text="Register as user", command=self._handle_show_register
             )
 
-        show_login_button.grid(row=4, column=0, padx=5, pady=5, sticky=constants.EW)
-        create_user_button.grid(row=6, column=0, padx=5, pady=5, sticky=constants.EW)
+        show_login_button.grid(row=5, column=0, padx=5, pady=5, sticky=constants.EW)
+        create_user_button.grid(row=7, column=0, padx=5, pady=5, sticky=constants.EW)

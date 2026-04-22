@@ -28,26 +28,26 @@ class RegisterView:
         password_again = self._password_again_entry.get()
 
         if len(username) < 4:
-            self._show_error(str("Username must be at least 4 characters long"))
+            self._show_error("Username must be at least 4 characters long")
             return
 
         if len(password) < 6:
-            self._error_variable.set(str("Password must be at least 6 characters long"))
+            self._show_error("Password must be at least 6 characters long")
             return
         
         if password != password_again:
-            self._error_variable.set(str("Passwords do not match"))
+            self._show_error("Passwords do not match")
             return
 
         try:
             user_service.create_user(username, password)
             self._handle_create_user()
         except UsernameAlreadyExistsError:
-            self._error_variable.set(f"Username {username} already exists")
+            self._show_error(f"Username {username} already exists")
     
     def _show_error(self, message):
         self._error_variable.set(message)
-        self._error_label.grid()
+        self._error_label.grid(row=6, column=0, columnspan=2, padx=5, pady=5, sticky="")
     
     def _hide_error(self):
         self._error_label.grid_remove()
@@ -81,7 +81,7 @@ class RegisterView:
         self._error_label = ttk.Label(
             master=self._frame, textvariable=self._error_variable, foreground="red"
             )
-        self._error_label.grid(row=6, column=0, columnspan=2, padx=5, pady=5)
+        self._error_label.grid(row=6, column=0, columnspan=2, padx=5, pady=5, sticky="")
         self._hide_error()
     
     def _initialize(self):
