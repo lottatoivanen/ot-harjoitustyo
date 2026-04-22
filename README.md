@@ -56,3 +56,11 @@ Tiedoston [.pylintrc](https://github.com/lottatoivanen/ot-harjoitustyo/blob/b1eb
 ```bash
 poetry run invoke lint
 ```
+
+### Ylimääräinen koodikatselmointi
+
+Tein koodikatselmoinnin Anna Kivekkään repositorioon
+
+- [Issue](https://github.com/AnnaKivekass/ot-harjoitustyo/issues/1)
+
+- [Annan repositorio](https://github.com/AnnaKivekass/ot-harjoitustyo)
