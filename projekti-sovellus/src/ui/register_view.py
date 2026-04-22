@@ -47,7 +47,7 @@ class RegisterView:
     
     def _show_error(self, message):
         self._error_variable.set(message)
-        self._error_label.grid(row=6, column=0, columnspan=2, padx=5, pady=5, sticky="")
+        self._error_label.grid(row=8, column=0, columnspan=2, padx=5, pady=5, sticky="")
     
     def _hide_error(self):
         self._error_label.grid_remove()
@@ -60,28 +60,34 @@ class RegisterView:
         username_label.grid(row=0, column=0, padx=5, pady=5, sticky=constants.W)
         self._username_entry.grid(row=1, column=0, padx=5, pady=5, sticky=constants.EW)
 
+        username_min = ttk.Label(master=self._frame, text="(at least 4 characters)", font=("Arial", 8))
+        username_min.grid(row=2, column=0, padx=5, pady=0, sticky=constants.W)
+
     def _initialize_password_field(self):
         password_label = ttk.Label(master=self._frame, text="Password:")
 
         self._password_entry = ttk.Entry(master=self._frame, show="*")
 
-        password_label.grid(row=2, column=0, padx=5, pady=5, sticky=constants.W)
-        self._password_entry.grid(row=3, column=0, padx=5, pady=5, sticky=constants.EW)
+        password_label.grid(row=3, column=0, padx=5, pady=5, sticky=constants.W)
+        self._password_entry.grid(row=4, column=0, padx=5, pady=5, sticky=constants.EW)
+
+        password_min = ttk.Label(master=self._frame, text="(at least 6 characters)", font=("Arial", 8))
+        password_min.grid(row=5, column=0, padx=5, pady=0, sticky=constants.W)
     
     def _initialize_password_again_field(self):
         password_again_label = ttk.Label(master=self._frame, text="Password again:")
 
         self._password_again_entry = ttk.Entry(master=self._frame, show="*")
 
-        password_again_label.grid(row=4, column=0, padx=5, pady=5, sticky=constants.W)
-        self._password_again_entry.grid(row=5, column=0, padx=5, pady=5, sticky=constants.EW)
+        password_again_label.grid(row=6, column=0, padx=5, pady=5, sticky=constants.W)
+        self._password_again_entry.grid(row=7, column=0, padx=5, pady=5, sticky=constants.EW)
 
     def _initialize_error_label(self):
         self._error_variable = StringVar(self._frame)
         self._error_label = ttk.Label(
             master=self._frame, textvariable=self._error_variable, foreground="red"
             )
-        self._error_label.grid(row=6, column=0, columnspan=2, padx=5, pady=5, sticky="")
+        self._error_label.grid(row=8, column=0, columnspan=2, padx=5, pady=5, sticky="")
         self._hide_error()
     
     def _initialize(self):
@@ -96,10 +102,10 @@ class RegisterView:
             master=self._frame, text="Register", command=self._create_user
             )
         already_label = ttk.Label(master=self._frame, text="Already have an account?")
-        already_label.grid(row=8, column=0, padx=5, pady=5, sticky=constants.W)
+        already_label.grid(row=10, column=0, padx=5, pady=5, sticky=constants.W)
         show_login_button = ttk.Button(
             master=self._frame, text="Login", command=self._handle_show_login
             )
 
-        create_user_button.grid(row=7, column=0, padx=5, pady=5, sticky=constants.EW)
-        show_login_button.grid(row=9, column=0, padx=5, pady=5, sticky=constants.EW)
+        create_user_button.grid(row=9, column=0, padx=5, pady=5, sticky=constants.EW)
+        show_login_button.grid(row=11, column=0, padx=5, pady=5, sticky=constants.EW)
