@@ -1,14 +1,14 @@
-from database_connection import get_database_connection
+from database_connection import get_database_connection, reset_database_connection
 
-def drop_tables():
-    connection = get_database_connection()
+def drop_tables(database_path = None):
+    connection = get_database_connection(database_path)
     cursor = connection.cursor()
     cursor.execute("DROP TABLE IF EXISTS users")
     cursor.execute("DROP TABLE IF EXISTS projects")
     connection.commit()
 
-def create_tables():
-    connection = get_database_connection()
+def create_tables(database_path = None):
+    connection = get_database_connection(database_path)
     cursor = connection.cursor()
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS users (
@@ -27,9 +27,10 @@ def create_tables():
     """)
     connection.commit()
 
-def initialize_database():
-    drop_tables()
-    create_tables()
+def initialize_database(database_path = None):
+    reset_database_connection()
+    drop_tables(database_path)
+    create_tables(database_path)
 
 if __name__ == "__main__":
     initialize_database()
