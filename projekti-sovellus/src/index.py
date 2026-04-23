@@ -1,6 +1,6 @@
 from tkinter import Tk
-from initialize_database import create_tables
-from ui.ui import UI
+from src.initialize_database import create_tables
+from src.ui.ui import UI
 
 create_tables()
 

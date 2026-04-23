@@ -2,11 +2,11 @@ from invoke import task
 
 @task
 def start(ctx):
-    ctx.run("python3 src/index.py", pty=True)
+    ctx.run("python3 -m src.index", pty=True)
 
 @task
 def build(ctx):
-    ctx.run("python3 src/build.py", pty=True)
+    ctx.run("python3 -m src.build", pty=True)
 
 @task
 def test(ctx):

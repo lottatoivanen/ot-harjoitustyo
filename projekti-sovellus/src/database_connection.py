@@ -1,5 +1,5 @@
 import sqlite3
-from config import DATABASE_FILE_PATH
+from src.config import DATABASE_FILE_PATH
 
 _connection = None
 

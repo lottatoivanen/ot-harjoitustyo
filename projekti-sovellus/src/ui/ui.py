@@ -1,8 +1,8 @@
-from ui.main_view import MainView
-from ui.login_view import LoginView
-from ui.register_view import RegisterView
-from services.project_service import project_service
-from services.user_service import user_service
+from src.ui.main_view import MainView
+from src.ui.login_view import LoginView
+from src.ui.register_view import RegisterView
+from src.services.project_service import project_service
+from src.services.user_service import user_service
 
 class UI:
     """Sovelluksen pääkäyttöliittymä, joka sisältää päävalikon ja projektinäkymän."""

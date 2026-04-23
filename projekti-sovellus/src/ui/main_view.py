@@ -1,12 +1,12 @@
 import tkinter as tk
 from tkinter import ttk, constants, messagebox
-from ui.project_list_view import ProjectListView
-from ui.add_project_view import AddProjectView
-from ui.project_view import ProjectView
-from ui.edit_project_view import EditProjectView
-from entities.project import Project
-from services.user_service import user_service
-from repositories.project_repository import project_repository
+from src.ui.project_list_view import ProjectListView
+from src.ui.add_project_view import AddProjectView
+from src.ui.project_view import ProjectView
+from src.ui.edit_project_view import EditProjectView
+from src.entities.project import Project
+from src.services.user_service import user_service
+from src.repositories.project_repository import project_repository
 
 class MainView:
     """Projektien listauksesta ja lisäämisestä vastaava näkymä."""

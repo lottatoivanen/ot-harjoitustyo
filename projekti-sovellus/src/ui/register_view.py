@@ -1,5 +1,5 @@
 from tkinter import ttk, constants, StringVar
-from services.user_service import user_service, UsernameAlreadyExistsError
+from src.services.user_service import user_service, UsernameAlreadyExistsError
 
 class RegisterView:
     """Käyttäjien rekisteröitymisestä vastaava näkymä."""

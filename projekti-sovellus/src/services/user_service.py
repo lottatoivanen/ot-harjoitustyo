@@ -1,5 +1,5 @@
-from entities.user import User
-from repositories.user_repository import user_repository as default_user_repository
+from src.entities.user import User
+from src.repositories.user_repository import user_repository as default_user_repository
 
 class InvalidCredentialsError(Exception):
     pass

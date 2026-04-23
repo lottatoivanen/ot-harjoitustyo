@@ -1,6 +1,6 @@
-from entities.project import Project
-from repositories.user_repository import user_repository
-from database_connection import get_database_connection
+from src.entities.project import Project
+from src.repositories.user_repository import user_repository
+from src.database_connection import get_database_connection
 
 def get_project_by_row(row):
     if row:
@@ -52,6 +52,7 @@ class ProjectRepository:
             (project.name, project.description, project.user.username if project.user else None)
         )
         self._connection.commit()
+        project.id = cursor.lastrowid
         return project
 
     def delete(self, project_id):

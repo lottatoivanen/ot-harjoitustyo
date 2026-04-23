@@ -1,5 +1,5 @@
-from entities.project import Project
-from repositories.project_repository import project_repository as default_project_repository
+from src.entities.project import Project
+from src.repositories.project_repository import project_repository as default_project_repository
 
 class ProjectService:
     """Projektien hallinnasta vastaava luokka, joka toimii sovelluksen logiikkakerroksessa."""

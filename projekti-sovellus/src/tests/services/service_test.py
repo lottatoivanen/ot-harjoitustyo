@@ -1,8 +1,8 @@
 import unittest
-from entities.project import Project
-from entities.user import User
-from services.project_service import ProjectService
-from services.user_service import UserService, UsernameAlreadyExistsError
+from src.entities.project import Project
+from src.entities.user import User
+from src.services.project_service import ProjectService
+from src.services.user_service import UserService, UsernameAlreadyExistsError
 
 class FakeProjectRepository:
     def __init__(self):
