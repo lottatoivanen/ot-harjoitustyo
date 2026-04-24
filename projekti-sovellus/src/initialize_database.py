@@ -22,6 +22,7 @@ def create_tables(database_path = None):
             name TEXT NOT NULL,
             description TEXT,
             username TEXT,
+            dates TEXT,
             FOREIGN KEY (username) REFERENCES users (username)
         )
     """)

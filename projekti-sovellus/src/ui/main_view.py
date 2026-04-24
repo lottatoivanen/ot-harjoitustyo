@@ -6,7 +6,10 @@ from src.ui.project_view import ProjectView
 from src.ui.edit_project_view import EditProjectView
 from src.entities.project import Project
 from src.services.user_service import user_service
+from src.services.date_service import date_service
 from src.repositories.project_repository import project_repository
+
+DATE_TYPE_OPTIONS = ("Practice", "Performance", "Other")
 
 class MainView:
     """Projektien listauksesta ja lisäämisestä vastaava näkymä."""
@@ -80,6 +83,8 @@ class MainView:
             handle_back=self._show_projects_view,
             handle_delete=self._delete_project,
             handle_edit=self._edit_project,
+            handle_add_date=self._add_project_date,
+            handle_delete_date=self._delete_project_date,
         )
 
         self._current_view.pack()
@@ -107,6 +112,23 @@ class MainView:
         project_repository.update(project)
         self._show_projects_view()
 
+    def _add_project_date(self, project, date_str, date_type):
+        parsed_date = date_service(date_str)
+        if not parsed_date:
+            return False
+
+        normalized_type = date_type if date_type in DATE_TYPE_OPTIONS else "Practice"
+        project.dates.append({"type": normalized_type, "date": parsed_date})
+        project_repository.update(project)
+        return True
+
+    def _delete_project_date(self, project, date_index):
+        if date_index < 0 or date_index >= len(project.dates):
+            return False
+
+        project.dates.pop(date_index)
+        project_repository.update(project)
+        return True
 
     def _show_add_project_view(self):
         self._clear_view()

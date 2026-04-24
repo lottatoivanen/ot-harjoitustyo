@@ -8,8 +8,15 @@ def get_project_by_row(row):
         name = row[1]
         description = row[2]
         username = row[3]
+        dates = row[4]
         user = user_repository.find_user_by_username(username) if username else None
-        return Project(project_id=project_id, name=name, description=description, user=user)
+        return Project(
+            project_id=project_id,
+            name=name,
+            description=description,
+            user=user,
+            dates=Project.dates_from_json(dates),
+        )
     return None
 
 class ProjectRepository:
@@ -21,7 +28,7 @@ class ProjectRepository:
     def find_all(self):
         cursor = self._connection.cursor()
         cursor.execute(
-            "SELECT id, name, description, username FROM projects"
+            "SELECT id, name, description, username, dates FROM projects"
         )
         rows = cursor.fetchall()
         projects = []
@@ -34,7 +41,7 @@ class ProjectRepository:
     def find_by_username(self, username):
         cursor = self._connection.cursor()
         cursor.execute(
-            "SELECT id, name, description, username FROM projects WHERE username = ?",
+            "SELECT id, name, description, username, dates FROM projects WHERE username = ?",
             (username,)
         )
         rows = cursor.fetchall()
@@ -48,8 +55,13 @@ class ProjectRepository:
     def create(self, project):
         cursor = self._connection.cursor()
         cursor.execute(
-            "INSERT INTO projects (name, description, username) VALUES (?, ?, ?)",
-            (project.name, project.description, project.user.username if project.user else None)
+            "INSERT INTO projects (name, description, username, dates) VALUES (?, ?, ?, ?)",
+            (
+                project.name,
+                project.description,
+                project.user.username if project.user else None,
+                project.dates_to_json(),
+            )
         )
         self._connection.commit()
         project.id = cursor.lastrowid
@@ -66,8 +78,8 @@ class ProjectRepository:
     def update(self, project):
         cursor = self._connection.cursor()
         cursor.execute(
-            "UPDATE projects SET name = ?, description = ? WHERE id = ?",
-            (project.name, project.description, project.id)
+            "UPDATE projects SET name = ?, description = ?, dates = ? WHERE id = ?",
+            (project.name, project.description, project.dates_to_json(), project.id)
         )
         self._connection.commit()
 
