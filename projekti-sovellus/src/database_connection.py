@@ -1,19 +1,19 @@
 import sqlite3
 from src.config import DATABASE_FILE_PATH
 
-_connection = None
+_CONNECTION = None
 
 def get_database_connection(database_path=DATABASE_FILE_PATH):
-    global _connection
+    global _CONNECTION
 
-    if _connection is None:
-        _connection = sqlite3.connect(database_path)
-        _connection.row_factory = sqlite3.Row
+    if _CONNECTION is None:
+        _CONNECTION = sqlite3.connect(database_path)
+        _CONNECTION.row_factory = sqlite3.Row
 
-    return _connection
+    return _CONNECTION
 
 def reset_database_connection():
-    global _connection
-    if _connection is not None:
-        _connection.close()
-    _connection = None
+    global _CONNECTION
+    if _CONNECTION is not None:
+        _CONNECTION.close()
+    _CONNECTION = None
