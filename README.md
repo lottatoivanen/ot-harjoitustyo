@@ -12,6 +12,7 @@ Sovellusta on mahdollista käyttää usealla eri käyttäjällä. Jokaisella kä
 - [työaikakirjanpito](projekti-sovellus/dokumentaatio/tyoaikakirjanpito.md)
 - [changelog](projekti-sovellus/dokumentaatio/changelog.md)
 - [arkkitehtuurikuvaus](projekti-sovellus/dokumentaatio/arkkitehtuuri.md)
+- [asennus- ja käyttöohjeet](projekti-sovellus/dokumentaatio/asennusohjeet.md)
 
 ## Asennus
 1. Siirry kansioon projekti-sovellus
