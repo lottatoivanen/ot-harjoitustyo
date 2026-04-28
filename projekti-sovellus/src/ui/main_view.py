@@ -14,7 +14,7 @@ from src.repositories.project_repository import project_repository
 DATE_TYPE_OPTIONS = ("Practice", "Performance", "Other")
 
 class MainView:
-    """Projektien listauksesta ja lisäämisestä vastaava näkymä."""
+    """Näkymä, jossa listataan käyttäjän projektit ja josta pääsee projektikohtaisiin näkymiin."""
 
     def __init__(self, root, projects, handle_project_select, handle_project_add, handle_logout):
         self._root = root
@@ -32,17 +32,21 @@ class MainView:
         self._initialize()
 
     def pack(self):
+        """Näyttää näkymän."""
         self._frame.pack(fill=constants.X)
 
     def destroy(self):
+        """Tuhoaa näkymän."""
         self._frame.destroy()
     
     def _clear_view(self):
+        """Tuhoaa nykyisen näkymän, jos sellainen on."""
         if self._current_view:
             self._current_view.destroy()
             self._current_view = None
     
     def _show_projects_view(self):
+        """Näyttää näkymän, jossa listataan käyttäjän projektit."""
         self._clear_view()
 
         self._current_view = ttk.Frame(master=self._content_frame)
@@ -77,6 +81,7 @@ class MainView:
         logout_button.pack(anchor="ne", padx=5, pady=5)
     
     def _show_project_view(self, project):
+        """Näyttää näkymän, jossa tarkastellaan projektia ja sen tietoja."""
         self._clear_view()
 
         self._current_view = ProjectView(
@@ -93,6 +98,7 @@ class MainView:
         self._current_view.pack()
     
     def _delete_project(self, project):
+        """Varmistaa projektin poiston."""
         if not messagebox.askyesno("Confirm delete", f"Delete project: '{project.name}'?"):
             return
         project_repository.delete(project.id)
@@ -100,22 +106,25 @@ class MainView:
         self._show_projects_view()
     
     def _edit_project(self, project):
+        """Näyttää näkymän, jossa muokataan projektia."""
         self._clear_view()
         self._current_view = EditProjectView(
             root=self._content_frame,
             project=project,
             handle_project_update=self._handle_project_edit,
-            handle_cancel=self._show_projects_view
+            handle_cancel=lambda: self._show_project_view(project)
         )
         self._current_view.grid()
     
     def _handle_project_edit(self, project, name, description):
+        """Päivittää projektin tiedot ja palaa projektin tarkastelunäkymään."""
         project.name = name
         project.description = description
         project_repository.update(project)
-        self._show_projects_view()
+        self._show_project_view(project)
 
     def _add_project_date(self, project, date_str, date_type):
+        """Lisää projektin tärkeän päivämäärän."""
         parsed_date = date_service(date_str)
         if not parsed_date:
             return False
@@ -126,6 +135,7 @@ class MainView:
         return True
 
     def _delete_project_date(self, project, date_index):
+        """Poistaa projektin päivämäärän."""
         if date_index < 0 or date_index >= len(project.dates):
             return False
 
@@ -134,6 +144,7 @@ class MainView:
         return True
 
     def _show_music_view(self, project):
+        """Näyttää näkymän, jossa tarkastellaan projektin nuotteja"""
         self._clear_view()
         self._current_view = MusicView(
             root=self._content_frame,
@@ -146,18 +157,21 @@ class MainView:
         self._current_view.pack()
 
     def _add_music_to_project(self, project, title, file_path):
+        """Lisää nuotin projektille."""
         new_music = Music(title=title, file_path=file_path)
         project.music_scores.append(new_music)
         project_repository.update(project)
         self._show_music_view(project)
 
     def _delete_music_from_project(self, project, music):
+        """Poistaa nuotin projektilta"""
         project.music_scores.remove(music)
         project_repository.update(project)
         self._show_music_view(project)
         return True
 
     def _show_sheet_music(self, project, music):
+        """Näyttää näkymän, jossa tarkastellaan nuottitiedostoa"""
         self._clear_view()
         self._current_view = SheetMusicView(
             self._content_frame,
@@ -167,6 +181,7 @@ class MainView:
         self._current_view.pack()
 
     def _show_add_project_view(self):
+        """Näyttää näkymän, jossa lisätään projekti"""
         self._clear_view()
 
         self._current_view = AddProjectView(
@@ -177,6 +192,7 @@ class MainView:
         self._current_view.grid()
 
     def _handle_project_add_and_return(self, project_name, project_desc):
+        """Lisää projektin ja palaa projektien listausnäkymään."""
         project_name = project_name.strip()
         project_desc = project_desc.strip()
         if not project_name:
@@ -190,6 +206,7 @@ class MainView:
         self._show_projects_view()
 
     def _initialize(self):
+        """Luo näkymän komponentit."""
         self._frame = ttk.Frame(master=self._root)
         self._content_frame = ttk.Frame(master=self._frame)
         self._content_frame.pack(fill=constants.BOTH, expand=True)

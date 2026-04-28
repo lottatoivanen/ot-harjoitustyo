@@ -15,12 +15,22 @@ class EditProjectView:
         self._initialize()
 
     def grid(self):
+        """Näyttää näkymän."""
         self._frame.grid(sticky=constants.EW)
 
     def destroy(self):
+        """Tuhoaa näkymän."""
         self._frame.destroy()
 
+    def _update_project(self):
+        """Käsittelee projektin päivittämisen."""
+        project_name = self._project_name_entry.get().strip()
+        project_desc = self._project_desc_entry.get("1.0", "end").strip()
+        if project_name:
+            self._handle_project_update(self._project, project_name, project_desc)
+
     def _initialize(self):
+        """Luo näkymän komponentit."""
         self._frame = ttk.Frame(master=self._root)
 
         title_lavel = ttk.Label(
@@ -68,9 +78,3 @@ class EditProjectView:
         )
         cancel_button.grid(row=3, column=1, padx=5, pady=5, sticky=constants.E)
         self._frame.grid_columnconfigure(1, weight=1)
-    
-    def _update_project(self):
-        project_name = self._project_name_entry.get().strip()
-        project_desc = self._project_desc_entry.get("1.0", "end").strip()
-        if project_name:
-            self._handle_project_update(self._project, project_name, project_desc)

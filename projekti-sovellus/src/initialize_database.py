@@ -1,6 +1,7 @@
 from src.database_connection import get_database_connection, reset_database_connection
 
 def drop_tables(database_path = None):
+    """Tyhjentää tietokantataulut."""
     connection = get_database_connection(database_path)
     cursor = connection.cursor()
     cursor.execute("DROP TABLE IF EXISTS users")
@@ -8,6 +9,7 @@ def drop_tables(database_path = None):
     connection.commit()
 
 def create_tables(database_path = None):
+    """Luo tietokannoille uudet taulut."""
     connection = get_database_connection(database_path)
     cursor = connection.cursor()
     cursor.execute("""
@@ -29,6 +31,7 @@ def create_tables(database_path = None):
     connection.commit()
 
 def initialize_database(database_path = None):
+    """Alustaa tietokannat."""
     reset_database_connection()
     drop_tables(database_path)
     create_tables(database_path)

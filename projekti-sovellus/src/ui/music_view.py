@@ -3,6 +3,8 @@ from tkinter import ttk, constants, filedialog, messagebox
 from os.path import basename
 
 class MusicView:
+    """Näkymä nuottitiedostojen lisäämiselle, tarkastelulle ja poistolle"""
+    
     def __init__(self, root, project, handle_back, handle_add_music, handle_delete_music, handle_open_music):
         self._root = root
         self._project = project
@@ -15,12 +17,15 @@ class MusicView:
         self._initialize()
 
     def pack(self):
+        """Näyttää näkymän."""
         self._frame.pack(fill=constants.BOTH, expand=True)
 
     def destroy(self):
+        """Tuhoaa näkymän."""
         self._frame.destroy()
     
     def _add_music(self):
+        """Lisää nuotteja projektille"""
         file_path = filedialog.askopenfilename(
             title="Select sheet music file",
             filetypes=[("PDF files", "*.pdf")]
@@ -30,14 +35,17 @@ class MusicView:
             self._handle_add_music(self._project, title, file_path)
 
     def _open_music(self, music):
+        """Näyttää näkymän, jossa tarkasellaan nuottia"""
         self._handle_open_music(self._project, music)
     
     def _delete_music(self, music):
+        """Poistaa nuotteja projektilta"""
         if not messagebox.askyesno("Confirm delete", f"Delete '{music.title}'?"):
             return
         self._handle_delete_music(self._project, music)
 
     def _initialize(self):
+        """Luo näkymän komponentit."""
         self._frame = ttk.Frame(master=self._root)
         header = ttk.Label(
             master=self._frame,

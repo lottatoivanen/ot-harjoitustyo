@@ -9,15 +9,18 @@ class ProjectService:
         self._project_repository = project_repository
 
     def create_project(self, name, description):
+        """Luo uuden projektin ja tallentaa sen tietokantaan."""
         project = Project(name=name, description=description, user=self._user)
         return self._project_repository.create(project)
 
     def get_projects(self):
+        """Hakee kaikki kirjautuneen käyttäjän projektit. Jos käyttäjä ei ole kirjautunut, hakee kaikki projektit"""
         if self._user:
             return self._project_repository.find_by_username(self._user.username)
         return self._project_repository.find_all()
 
     def get_projects_for_user(self, user):
+        """Hakee kaikki käyttäjän projektit"""
         return self._project_repository.find_by_username(user.username)
 
 project_service = ProjectService()

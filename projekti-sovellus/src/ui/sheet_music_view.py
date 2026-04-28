@@ -4,6 +4,8 @@ from PIL import Image, ImageTk
 import fitz
 
 class SheetMusicView:
+    """Näkymä, joka näyttää nuotit PDF-muodossa."""
+
     def __init__(self, root, music, handle_back):
         self._root = root
         self._music = music
@@ -16,12 +18,15 @@ class SheetMusicView:
         self._initialize()
 
     def pack(self):
+        """Näyttää näkymän."""
         self._frame.pack(fill=constants.BOTH, expand=True)
 
     def destroy(self):
+        """Tuhoaa näkymän."""
         self._frame.destroy()
 
     def _render_pdf(self):
+        """Lataa tiedoston ja renderöi sen näkymään."""
         doc = None
         try:
             doc = fitz.open(self._music.file_path)
@@ -52,6 +57,7 @@ class SheetMusicView:
                 doc.close()
 
     def _initialize(self):
+        """Luo näkymän komponentit."""
         self._frame = ttk.Frame(self._root)
 
         header = ttk.Label(

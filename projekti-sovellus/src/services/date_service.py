@@ -8,6 +8,7 @@ SUPPORTED_DATE_FORMATS = (
 )
 
 def date_service(date_str):
+    """Päivämääräpalvelu, joka parsii syötteen sallituissa formaateissa."""
     value = date_str.strip()
     if not value:
         return None

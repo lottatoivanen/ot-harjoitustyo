@@ -3,6 +3,8 @@ from tkinter import ttk, constants, messagebox
 DATE_TYPE_OPTIONS = ("Practice", "Performance", "Other")
 
 class ProjectView:
+    """Näkymä projektin tarkastelulle"""
+
     def __init__(self, root, project, handle_back, handle_delete, handle_edit, handle_add_date, handle_delete_date, handle_music):
         self._root = root
         self._project = project
@@ -19,12 +21,15 @@ class ProjectView:
         self._initialize()
 
     def pack(self):
+        """Näyttää näkymän."""
         self._frame.pack(fill=constants.Y)
 
     def destroy(self):
+        """Tuhoaa näkymän."""
         self._frame.destroy()
 
     def _add_date(self):
+        """Lisää tärkeitä päivämääriä projektille"""
         date_str = self._date_entry.get()
         date_type = self._date_type_combobox.get().strip()
 
@@ -44,6 +49,7 @@ class ProjectView:
             messagebox.showerror("Error", "Please enter date in format dd.mm.yyyy or dd.mm.yyyy hh:mm")
 
     def _delete_date(self, date_index):
+        """Poistaa projektin päivämäärän"""
         if not messagebox.askyesno("Confirm delete", "Delete this date?"):
             return
 
@@ -51,6 +57,7 @@ class ProjectView:
             self._render_dates()
 
     def _render_dates(self):
+        """Tuhoaa vanhat päivämääräkomponentit ja luo uudet projektin päivämäärien perusteella."""
         for widget in self._dates_frame.winfo_children():
             widget.destroy()
 
@@ -82,9 +89,11 @@ class ProjectView:
             delete_button.grid(row=0, column=1, padx=5, sticky=constants.W)
     
     def _handle_music(self):
+        """Näyttää näkymän, jossa tarkasellaan projektin nuotteja."""
         self._handle_open_music(self._project)
 
     def _initialize(self):
+        """Luo näkymän komponentit."""
         self._frame = ttk.Frame(master=self._root)
 
         name_label = ttk.Label(self._frame, text=self._project.name, font=("Arial", 16, "bold"))

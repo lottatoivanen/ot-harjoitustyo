@@ -13,6 +13,7 @@ class Project:
         self.music_scores = music_scores or []
 
     def dates_to_json(self):
+        """Sarjoittaa päivämäärät ja niiden tyypit JSON-muotoon"""
         serialized = []
         for entry in self.dates:
             if isinstance(entry, dict):
@@ -32,6 +33,7 @@ class Project:
 
     @staticmethod
     def dates_from_json(json_str):
+        """Parsii JSON-muodossa olevat päivämäärät ja niiden tyypit takaisin listaksi."""
         if not json_str:
             return []
         raw = json.loads(json_str)

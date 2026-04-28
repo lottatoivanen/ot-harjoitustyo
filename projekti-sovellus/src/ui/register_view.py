@@ -17,12 +17,15 @@ class RegisterView:
         self._initialize()
     
     def pack(self):
+        """Näyttää näkymän."""
         self._frame.pack(fill=constants.Y)
     
     def destroy(self):
+        """Tuhoaa näkymän."""
         self._frame.destroy()
     
     def _create_user(self):
+        """Käsittelee käyttäjän rekisteröitymisen."""
         username = self._username_entry.get()
         password = self._password_entry.get()
         password_again = self._password_again_entry.get()
@@ -46,13 +49,16 @@ class RegisterView:
             self._show_error(f"Username {username} already exists")
     
     def _show_error(self, message):
+        """Näyttää virheviestin"""
         self._error_variable.set(message)
         self._error_label.grid(row=8, column=0, columnspan=2, padx=5, pady=5, sticky="")
     
     def _hide_error(self):
+        """Piilottaa virheviestin."""
         self._error_label.grid_remove()
 
     def _initialize_username_field(self):
+        """Luo käyttäjätunnuskentän"""
         username_label = ttk.Label(master=self._frame, text="Username:")
 
         self._username_entry = ttk.Entry(master=self._frame)
@@ -64,6 +70,7 @@ class RegisterView:
         username_min.grid(row=2, column=0, padx=5, pady=0, sticky=constants.W)
 
     def _initialize_password_field(self):
+        """Luo salasanakentän."""
         password_label = ttk.Label(master=self._frame, text="Password:")
 
         self._password_entry = ttk.Entry(master=self._frame, show="*")
@@ -75,6 +82,7 @@ class RegisterView:
         password_min.grid(row=5, column=0, padx=5, pady=0, sticky=constants.W)
     
     def _initialize_password_again_field(self):
+        """Luo sanasanan vahvistuskentän."""
         password_again_label = ttk.Label(master=self._frame, text="Password again:")
 
         self._password_again_entry = ttk.Entry(master=self._frame, show="*")
@@ -83,6 +91,7 @@ class RegisterView:
         self._password_again_entry.grid(row=7, column=0, padx=5, pady=5, sticky=constants.EW)
 
     def _initialize_error_label(self):
+        """Luo virheviestin kentän"""
         self._error_variable = StringVar(self._frame)
         self._error_label = ttk.Label(
             master=self._frame, textvariable=self._error_variable, foreground="red"
@@ -91,6 +100,7 @@ class RegisterView:
         self._hide_error()
     
     def _initialize(self):
+        """Luo näkymän komponentit."""
         self._frame = ttk.Frame(master=self._root)
 
         self._initialize_username_field()
