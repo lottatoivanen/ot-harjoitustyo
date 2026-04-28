@@ -4,12 +4,13 @@ from datetime import datetime
 
 class Project:
     """Luokka projektia varten, jolla on nimi, kuvaus ja uniikki id."""
-    def __init__(self, name, description, user, project_id=None, dates=None):
+    def __init__(self, name, description, user, project_id=None, dates=None, music_scores=None):
         self.name = name
         self.description = description
         self.user = user
         self.id = project_id if project_id else str(uuid.uuid4())
         self.dates = dates or []
+        self.music_scores = music_scores or []
 
     def dates_to_json(self):
         serialized = []
@@ -48,3 +49,9 @@ class Project:
                     "date": datetime.fromisoformat(item)
                 })
         return parsed
+
+class Music:
+    """Luokka musiikkia varten, jolla on otsikko, tiedostopolku ja analyysitiedot."""
+    def __init__(self, title, file_path):
+        self.title = title
+        self.file_path = file_path

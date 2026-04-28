@@ -7,8 +7,7 @@ create_tables()
 window = Tk()
 window.title("Muskaali- ja näytelmäprojekti sovellus")
 
-window.geometry("500x400")
-window.minsize(400, 300)
+window.minsize(width=500, height=400)
 
 ui = UI(window)
 ui.start()

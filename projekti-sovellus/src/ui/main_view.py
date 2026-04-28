@@ -4,7 +4,9 @@ from src.ui.project_list_view import ProjectListView
 from src.ui.add_project_view import AddProjectView
 from src.ui.project_view import ProjectView
 from src.ui.edit_project_view import EditProjectView
-from src.entities.project import Project
+from src.ui.music_view import MusicView
+from src.ui.sheet_music_view import SheetMusicView
+from src.entities.project import Project, Music
 from src.services.user_service import user_service
 from src.services.date_service import date_service
 from src.repositories.project_repository import project_repository
@@ -85,6 +87,7 @@ class MainView:
             handle_edit=self._edit_project,
             handle_add_date=self._add_project_date,
             handle_delete_date=self._delete_project_date,
+            handle_music=self._show_music_view,
         )
 
         self._current_view.pack()
@@ -129,6 +132,39 @@ class MainView:
         project.dates.pop(date_index)
         project_repository.update(project)
         return True
+
+    def _show_music_view(self, project):
+        self._clear_view()
+        self._current_view = MusicView(
+            root=self._content_frame,
+            project=project,
+            handle_back=lambda: self._show_project_view(project),
+            handle_add_music=self._add_music_to_project,
+            handle_delete_music=self._delete_music_from_project,
+            handle_open_music=self._show_sheet_music
+        )
+        self._current_view.pack()
+
+    def _add_music_to_project(self, project, title, file_path):
+        new_music = Music(title=title, file_path=file_path)
+        project.music_scores.append(new_music)
+        project_repository.update(project)
+        self._show_music_view(project)
+
+    def _delete_music_from_project(self, project, music):
+        project.music_scores.remove(music)
+        project_repository.update(project)
+        self._show_music_view(project)
+        return True
+
+    def _show_sheet_music(self, project, music):
+        self._clear_view()
+        self._current_view = SheetMusicView(
+            self._content_frame,
+            music,
+            handle_back=lambda: self._show_music_view(project)
+        )
+        self._current_view.pack()
 
     def _show_add_project_view(self):
         self._clear_view()

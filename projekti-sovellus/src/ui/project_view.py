@@ -3,12 +3,13 @@ from tkinter import ttk, constants, messagebox
 DATE_TYPE_OPTIONS = ("Practice", "Performance", "Other")
 
 class ProjectView:
-    def __init__(self, root, project, handle_back, handle_delete, handle_edit, handle_add_date, handle_delete_date):
+    def __init__(self, root, project, handle_back, handle_delete, handle_edit, handle_add_date, handle_delete_date, handle_music):
         self._root = root
         self._project = project
         self._handle_back = handle_back
         self._handle_delete = handle_delete
         self._handle_edit = handle_edit
+        self._handle_open_music = handle_music
         self._on_add_date = handle_add_date
         self._on_delete_date = handle_delete_date
         self._frame = None
@@ -79,6 +80,9 @@ class ProjectView:
                 command=lambda i=index: self._delete_date(i)
             )
             delete_button.grid(row=0, column=1, padx=5, sticky=constants.W)
+    
+    def _handle_music(self):
+        self._handle_open_music(self._project)
 
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
@@ -141,3 +145,10 @@ class ProjectView:
         self._dates_frame = ttk.Frame(master=self._frame)
         self._dates_frame.grid(row=7, column=0, columnspan=2, padx=5, pady=5, sticky=constants.W)
         self._render_dates()
+
+        music_button = ttk.Button(
+            master=self._frame,
+            text="Manage Music",
+            command=lambda: self._handle_open_music(self._project)
+        )
+        music_button.grid(row=3, column=9, padx=5, pady=5, sticky=constants.E)

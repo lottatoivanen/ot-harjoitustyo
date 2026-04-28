@@ -28,7 +28,7 @@ class UI:
             self._projects,
             handle_project_select=None,
             handle_project_add=project_service.create_project,
-            handle_logout=self.logout
+            handle_logout=self.logout,
         )
         self._current_view.pack()
 
