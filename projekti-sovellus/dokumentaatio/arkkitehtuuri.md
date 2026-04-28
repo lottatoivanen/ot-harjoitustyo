@@ -1,8 +1,42 @@
 # Arkkitehtuurikuvaus
 
+## Rakenne
+
+Sovellus noudattaa kerrosarkkitehtuuria, jonka toiminnallisuus perustuu seuraavanlaiseen tapaan:
+
+- ui/            → käyttöliittymä
+- services/      → sovelluslogiikka
+- repositories/  → tiedon tallennus
+- entities/      → tietomallit
+
+Sovelluksen pakkausarkkitehtuuri on seuraavanlainen:
+
+```mermaid
+ flowchart TD
+    A[ui] --> B[services]
+    B --> C[repositories]
+    C --> D[entities]
+    B --> D
+```
+
+## Käyttöliittymä
+
+Sovelluksen käyttöliittymä sisältää kahdeksan erillistä näkymää:
+
+- Kirjautuminen
+- Rekisteröityminen
+- Projektilista
+- Projektin lisäys
+- Projektin tarkastelu
+- Projektin muokkaus
+- Projektin nuottien hallinta
+- Projektin nuottien tarkastelu
+
+Näistä jokainen on toteutettu omana luokkana. Näkymiä pystyy olla vain yksi kerrallaan näkyvillä. Käyttöliittymän pääasiallisten näkymien hallinnasta vastaa `UI`-luokka. `MainView`-luokka taas vastaa projektin sisäisten näkymien hallinnasta `UI`-luokan avulla.
+
 ## Sovelluslogiikka
 
-Sovelluksen loogisen tietomallin muodostavat luokat __User__ ja __Project__, jotka kuvaavat käyttäjiä ja käyttäjien projekteja.
+Sovelluksen loogisen tietomallin muodostavat luokat `User` ja `Project`, jotka kuvaavat käyttäjiä ja käyttäjien projekteja.
 
 ```mermaid
  classDiagram
@@ -18,13 +52,17 @@ Sovelluksen loogisen tietomallin muodostavat luokat __User__ ja __Project__, jot
           user
       }
 ```
-Toiminnallisista kokonaisuuksista vastaavat luokat __UserService__ ja __ProjectService__, jotka tarjoavat käyttöliittymän tarvitsemat toiminnot, kuten:
+Toiminnallisista kokonaisuuksista vastaavat luokat `UserService` ja `ProjectService`, jotka tarjoavat käyttöliittymän tarvitsemat toiminnot, kuten:
 - UserService.login(username, password)
 - UserService.create_user(username, password)
 - ProjectService.create_project(name, description)
 - ProjectService.get_projects()
 
-Palveluluokat käyttävät tietojen tallennukseen pakkauksessa repositories sijaitsevia luokkia __UserRepository__ ja __ProjectRepository__, joiden toteutukset injektoidaan palveluluokille konstruktorissa.
+Palveluluokat käyttävät tietojen tallennukseen pakkauksessa repositories sijaitsevia luokkia `UserRepository` ja `ProjectRepository`, joiden toteutukset injektoidaan palveluluokille konstruktorissa.
+
+## Tietojen pysyväistallennus
+
+Tietojen tallettamisesta huolehtivat luokat ovat _repositories_ hakemiston luokat `UserRepository` ja `ProjectRepository`. Molemmat näistä luokista tallettavat tietoa SQLite-tietokantaan. 
 
 ## Sovelluksen päätoiminnallisuudet
 
