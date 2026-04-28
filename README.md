@@ -1,6 +1,8 @@
 # Ohjelmistotekniikka harjoitustyö
 
-Teen harjoitustyönä sovelluksen __musikaali- ja näytelmäprojektien__ hallintaan ja _harjoitusten seurantaan_.
+Teen harjoitustyönä sovelluksen __musikaali- ja näytelmäprojektien__ hallintaan. Sovelluksessa projekteihin voi lisätä tärkeitä päivämääriä, kuten harjoituksia ja esityksiä, sekä nuottitiedostoja.
+
+Sovellusta on mahdollista käyttää usealla eri käyttäjällä. Jokaisella käyttäjällä on oma projektilista.
 
 ## Viimeisin release
 [Viikko 5 release](../../releases/latest)
