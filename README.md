@@ -4,8 +4,12 @@ Teen harjoitustyönä sovelluksen __musikaali- ja näytelmäprojektien__ hallint
 
 Sovellusta on mahdollista käyttää usealla eri käyttäjällä. Jokaisella käyttäjällä on oma projektilista.
 
-## Viimeisin release
-[Viikko 5 release](../../releases/latest)
+## Releaset
+### Viimeisin release
+- [Viikko 6 release](../../releases/latest)
+
+### Aikaisemmat releaset
+- [Viikko 5 release](../../releases/tag/viikko5)
 
 ## Dokumentaatio
 - [vaatimuusmäärittely](projekti-sovellus/dokumentaatio/vaatimuusmaarittely.md)
