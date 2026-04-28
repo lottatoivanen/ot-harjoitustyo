@@ -21,12 +21,12 @@ Sovelluksen alkuvaiheessa on yksi käyttäjärooli. Myöhemmin sovellukseen saat
 ### Kirjautumisen jälkeen
 - Käyttäjä näkee omat projektinsa. TEHTY
 - Käyttäjä voi luoda ja poistaa projekteja. TEHTY
-- Käyttäjä voi lisätä harjoituksia, roolilistoja ja muistutuksia projekteihin.
+- Käyttäjä voi lisätä harjoituksia, roolilistoja ja muistutuksia projekteihin. TEHTY
 - Käyttäjä voi kirjautua ulos järjestelmästä. TEHTY
 
 ## Jatkokehitysideoita
 
-- Harjoitusnauhojen, käsiohjelman ja musiikkinuottien lisääminen.
+- Harjoitusnauhojen, käsiohjelman ja musiikkinuottien lisääminen. TEHTY
 - Projektitiimit, jolloin useampi käyttäjä voi nähdä ja muokata projektin tietoja.
 - Kutsujärjestelmä, jolla käyttäjät voivat liittyä projekteihin.
 - Harjoitusaktiivisuuden seuranta ja raportit.

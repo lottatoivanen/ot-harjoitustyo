@@ -11,7 +11,10 @@
 | 14.4. | 2,5h | uusien testien lisäys, ohjelman rakenteen laatiminen luokka- ja pakkauskaavioiksi sekä työnetenemisen dokumentaatio |
 | 17.4. | 3h   | tietokanta toiminnallisuuden viimeistely |
 | 20.4. | 5h   | projektien poistamisen ja muokkaamisen lisääminen toiminnallisuuteen|
-| 21.4. | 2,5h | ulos kirjautumisen lisääminen toiminnallisuuteen, dokumentaation päivitys sekä sekvenssikaavioiden lisäys päätoiminnallisuudesta |
+| 21.4. | 2,5h | ulos kirjautumisen lisääminen toiminnallisuuteen, dokumentaation päivitys sekä sekvenssikaavioiden lisääminen päätoiminnallisuudesta |
+| 22.4. | 1h   | virheiden korjaus ja toiminnallisuuden parantelu |
+| 23.4. | 3h   | tietokanta toiminnallisuuden parantelu, erillisen tietokannan lisääminen testeille, uusien testien lisääminen |
+| 24.4. | 5h   | datetime-kirjaston lisääminen koodiin, tärkeiden päivämäärien toiminnallisuus sovellukseen |
+| 28.4. | 6h   | PDF-tiedostojen lisääminen sovellukseen, erillisen musiikkinäkymän sekä nuottinäkymän lisääminen |
 
-__Yhteensä käytetty aika:__ 28 tuntia
-
+__Yhteensä käytetty aika:__ 43 tuntia
