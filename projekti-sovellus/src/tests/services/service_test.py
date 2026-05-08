@@ -3,6 +3,8 @@ from src.entities.project import Project
 from src.entities.user import User
 from src.services.project_service import ProjectService, ValidProjectError
 from src.services.user_service import UserService, UsernameAlreadyExistsError
+from src.services.music_service import MusicService
+from src.services.date_service import date_service
 
 class FakeProjectRepository:
     def __init__(self):
@@ -78,3 +80,29 @@ class TestUserService(unittest.TestCase):
         user = self.user_service.login("muumimamma", "muumilaakso1")
         self.assertEqual(user.username, "muumimamma")
         self.assertEqual(user.password, "muumilaakso1")
+
+class TestMusicService(unittest.TestCase):
+    def setUp(self):
+        self.music_service = MusicService()
+
+    def test_get_music_score_image_with_valid_file(self):
+        img = self.music_service.get_music_score_image("src/tests/test-music/maybe-this-time.pdf")
+        self.assertIsNotNone(img)
+    
+    def test_get_music_score_image_with_invalid_file(self):
+        img = self.music_service.get_music_score_image("src/tests/test-music/not-real-music.pdf")
+        self.assertIsNone(img)
+
+class TestDateService(unittest.TestCase):
+    def test_date_service_with_valid_date(self):
+        date = date_service("12.05.2026 18:00")
+        self.assertIsNotNone(date)
+        self.assertEqual(date.day, 12)
+        self.assertEqual(date.month, 5)
+        self.assertEqual(date.year, 2026)
+        self.assertEqual(date.hour, 18)
+        self.assertEqual(date.minute, 0)
+    
+    def test_date_service_with_invalid_date(self):
+        date = date_service("-12.05.2026")
+        self.assertIsNone(date)

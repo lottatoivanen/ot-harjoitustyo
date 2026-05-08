@@ -10,7 +10,7 @@ def build(ctx):
 
 @task
 def test(ctx):
-    ctx.run("pytest src", pty=True)
+    ctx.run("PYTHONPATH=. pytest src", pty=True)
 
 @task
 def coverage(ctx):
