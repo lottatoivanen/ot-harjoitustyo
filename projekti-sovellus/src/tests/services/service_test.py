@@ -20,6 +20,12 @@ class FakeProjectRepository:
         self.projects.append(project)
         return project
 
+    def delete(self, project_id):
+        self.projects = [p for p in self.projects if p.id != project_id]
+    
+    def update(self, project):
+        return project
+
 class FakeUserRepository:
     def __init__(self):
         self.users = []
@@ -60,7 +66,19 @@ class TestProjectService(unittest.TestCase):
     def test_create_project_with_empty_name(self):
         with self.assertRaises(ValidProjectError):
             self.project_service.create_project("", "Tämä on projekti ilman nimeä")
-
+    
+    def test_delete_project(self):
+        project = self.project_service.create_project("Uusi näytelmä", "Tämä on uusi näytelmä")
+        self.project_service.delete_project(project)
+        projects = self.project_service.get_projects()
+        self.assertEqual(len(projects), 2)
+    
+    def test_edit_project(self):
+        project = self.project_service.create_project("Uusi näytelmä", "Tämä on uusi näytelmä")
+        self.project_service.edit_project(project, "Uusi musikaali", "Tämä olikin musikaali")
+        projects = self.project_service.get_projects()
+        self.assertEqual(project.name, "Uusi musikaali")
+        self.assertEqual(project.description, "Tämä olikin musikaali")
 
 class TestUserService(unittest.TestCase):
     def setUp(self):
