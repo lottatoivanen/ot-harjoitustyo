@@ -5,6 +5,7 @@ from src.database_connection import get_database_connection, reset_database_conn
 from src.initialize_database import initialize_database
 from src.repositories.project_repository import project_repository
 from src.repositories.user_repository import user_repository
+from src.services.project_service import ValidProjectError
 from src.entities.project import Project
 from src.entities.user import User
 
@@ -37,13 +38,13 @@ class TestProjectRepository(unittest.TestCase):
         self.assertEqual(projects[0].description, "Tämä on näytelmäprojekti")
         self.assertEqual(projects[0].user.username, "muumimamma")
     
-    def test_delete(self):
+    def test_delete_project(self):
         project = project_repository.create(Project(name="Näytelmä", description="Tämä on näytelmäprojekti", user=self.user))
         project_repository.delete(project.id)
         projects = project_repository.find_all()
         self.assertEqual(len(projects), 0)
     
-    def test_update(self):
+    def test_update_project(self):
         project = project_repository.create(Project(name="Näytelmä", description="Tämä on näytelmäprojekti", user=self.user))
         project.name = "Uusi näytelmä"
         project.description = "Tämä on uusi näytelmäprojekti"
@@ -53,3 +54,10 @@ class TestProjectRepository(unittest.TestCase):
         self.assertEqual(projects[0].name, "Uusi näytelmä")
         self.assertEqual(projects[0].description, "Tämä on uusi näytelmäprojekti")
         self.assertEqual(projects[0].user.username, "muumimamma")
+    
+    def test_create_new_user_and_add_project(self):
+        new_user = user_repository.create(User(username="muumipappa", password="muumilaakso2"))
+        project = project_repository.create(Project(name="Muumipapan musikaali", description="Tämä on muumipapan musikaali", user=new_user))
+        self.assertEqual(project.name, "Muumipapan musikaali")
+        self.assertEqual(project.description, "Tämä on muumipapan musikaali")
+        self.assertEqual(project.user.username, "muumipappa")

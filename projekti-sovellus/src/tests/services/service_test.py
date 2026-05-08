@@ -1,7 +1,7 @@
 import unittest
 from src.entities.project import Project
 from src.entities.user import User
-from src.services.project_service import ProjectService
+from src.services.project_service import ProjectService, ValidProjectError
 from src.services.user_service import UserService, UsernameAlreadyExistsError
 
 class FakeProjectRepository:
@@ -54,6 +54,10 @@ class TestProjectService(unittest.TestCase):
     def test_get_all_projects(self):
         projects = self.project_service.get_projects()
         self.assertEqual(len(projects), 2)
+    
+    def test_create_project_with_empty_name(self):
+        with self.assertRaises(ValidProjectError):
+            self.project_service.create_project("", "Tämä on projekti ilman nimeä")
 
 
 class TestUserService(unittest.TestCase):

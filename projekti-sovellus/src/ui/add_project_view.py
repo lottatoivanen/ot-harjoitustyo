@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import ttk, constants
+from tkinter import ttk, constants, messagebox
 
 class AddProjectView:
     """Näkymä, joka mahdollistaa uuden projektin lisäämisen."""
@@ -27,6 +27,9 @@ class AddProjectView:
         project_desc = self._project_desc_entry.get("1.0", "end").strip()
         if project_name:
             self._handle_project_add(project_name, project_desc)
+        if not project_name:
+            messagebox.showerror("Error", "Project name cannot be empty")
+            return
 
     def _initialize(self):
         """Luo näkymän komponentit."""

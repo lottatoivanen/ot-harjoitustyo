@@ -89,4 +89,5 @@ class ProjectRepository:
         )
         self._connection.commit()
 
+
 project_repository = ProjectRepository(get_database_connection())

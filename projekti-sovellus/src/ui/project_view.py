@@ -69,7 +69,7 @@ class ProjectView:
             row = ttk.Frame(self._dates_frame)
             row.pack(anchor=constants.W, fill=constants.X, pady=2)
 
-            date_type = date_entry.get("type", "Other")
+            date_type = date_entry.get("type", "Practice")
             date_value = date_entry.get("date")
 
             if not date_value:
