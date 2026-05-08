@@ -6,9 +6,10 @@ Sovellusta on mahdollista käyttää usealla eri käyttäjällä. Jokaisella kä
 
 ## Releaset
 ### Viimeisin release
-- [Viikko 6 release](../../releases/latest)
+- [Loppupalautus](../../releases/latest)
 
 ### Aikaisemmat releaset
+- [Viikko 6 release](../../releases/tag/viikko6)
 - [Viikko 5 release](../../releases/tag/viikko5)
 
 ## Dokumentaatio
@@ -17,6 +18,7 @@ Sovellusta on mahdollista käyttää usealla eri käyttäjällä. Jokaisella kä
 - [changelog](projekti-sovellus/dokumentaatio/changelog.md)
 - [arkkitehtuurikuvaus](projekti-sovellus/dokumentaatio/arkkitehtuuri.md)
 - [asennus- ja käyttöohjeet](projekti-sovellus/dokumentaatio/asennusohjeet.md)
+- [testausdokumentti](projekti-sovellus/dokumentaatio/testausdokumentti.md)
 
 ## Asennus
 1. Siirry kansioon projekti-sovellus
