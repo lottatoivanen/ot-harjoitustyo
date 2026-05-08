@@ -1,4 +1,3 @@
-import tkinter as tk
 from tkinter import ttk, constants, messagebox
 from src.ui.project_list_view import ProjectListView
 from src.ui.add_project_view import AddProjectView
@@ -6,10 +5,8 @@ from src.ui.project_view import ProjectView
 from src.ui.edit_project_view import EditProjectView
 from src.ui.music_view import MusicView
 from src.ui.sheet_music_view import SheetMusicView
-from src.entities.project import Project, Music
 from src.services.user_service import user_service
-from src.services.date_service import date_service
-from src.repositories.project_repository import project_repository
+from src.services.project_service import project_service
 
 DATE_TYPE_OPTIONS = ("Practice", "Performance", "Other")
 
@@ -101,8 +98,8 @@ class MainView:
         """Varmistaa projektin poiston."""
         if not messagebox.askyesno("Confirm delete", f"Delete project: '{project.name}'?"):
             return
-        project_repository.delete(project.id)
-        self._projects = [p for p in self._projects if p.id != project.id]
+        project_service.delete_project(project)
+        self._projects = project_service.get_projects()
         self._show_projects_view()
     
     def _edit_project(self, project):
@@ -118,30 +115,17 @@ class MainView:
     
     def _handle_project_edit(self, project, name, description):
         """Päivittää projektin tiedot ja palaa projektin tarkastelunäkymään."""
-        project.name = name
-        project.description = description
-        project_repository.update(project)
+        project_service.edit_project(project, name, description)
+        self._projects = project_service.get_projects()
         self._show_project_view(project)
 
     def _add_project_date(self, project, date_str, date_type):
         """Lisää projektin tärkeän päivämäärän."""
-        parsed_date = date_service(date_str)
-        if not parsed_date:
-            return False
-
-        normalized_type = date_type if date_type in DATE_TYPE_OPTIONS else "Practice"
-        project.dates.append({"type": normalized_type, "date": parsed_date})
-        project_repository.update(project)
-        return True
+        return project_service.add_project_date(project, date_str, date_type)
 
     def _delete_project_date(self, project, date_index):
         """Poistaa projektin päivämäärän."""
-        if date_index < 0 or date_index >= len(project.dates):
-            return False
-
-        project.dates.pop(date_index)
-        project_repository.update(project)
-        return True
+        return project_service.delete_project_date(project, date_index)
 
     def _show_music_view(self, project):
         """Näyttää näkymän, jossa tarkastellaan projektin nuotteja"""
@@ -158,17 +142,13 @@ class MainView:
 
     def _add_music_to_project(self, project, title, file_path):
         """Lisää nuotin projektille."""
-        new_music = Music(title=title, file_path=file_path)
-        project.music_scores.append(new_music)
-        project_repository.update(project)
+        project_service.add_project_music(project, title, file_path)
         self._show_music_view(project)
 
     def _delete_music_from_project(self, project, music):
         """Poistaa nuotin projektilta"""
-        project.music_scores.remove(music)
-        project_repository.update(project)
+        project_service.delete_project_music(project, music)
         self._show_music_view(project)
-        return True
 
     def _show_sheet_music(self, project, music):
         """Näyttää näkymän, jossa tarkastellaan nuottitiedostoa"""
@@ -200,9 +180,8 @@ class MainView:
         if self._handle_project_add:
             new_project = self._handle_project_add(project_name, project_desc)
         else:
-            new_project = Project(name=project_name, description=project_desc, user=None)
-        self._projects.append(new_project)
-
+            new_project = project_service.create_project(project_name, project_desc)
+        self._projects = project_service.get_projects()
         self._show_projects_view()
 
     def _initialize(self):
