@@ -66,7 +66,7 @@ Tiedoston [.pylintrc](https://github.com/lottatoivanen/ot-harjoitustyo/blob/b1eb
 poetry run invoke lint
 ```
 
-### Ylimääräinen koodikatselmointi
+## Ylimääräinen koodikatselmointi
 
 Tein koodikatselmoinnin Anna Kivekkään repositorioon
 
