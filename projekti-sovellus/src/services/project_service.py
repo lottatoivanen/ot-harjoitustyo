@@ -33,7 +33,7 @@ class ProjectService:
     def delete_project(self, project):
         """Poistaa projektin tietokannasta."""
         self._project_repository.delete(project.id)
-    
+
     def edit_project(self, project, new_name, new_description):
         """Muokkaa olemassa olevan projektin tietoja tietokannassa."""
         if not new_name:
@@ -41,7 +41,7 @@ class ProjectService:
         project.name = new_name
         project.description = new_description
         self._project_repository.update(project)
-    
+
     def add_project_date(self, project, date_str, date_type):
         parsed_date = date_service(date_str)
         if not parsed_date:
@@ -75,6 +75,5 @@ class ProjectService:
         ]
         self._project_repository.update(project)
         return True
-    
 
 project_service = ProjectService()
