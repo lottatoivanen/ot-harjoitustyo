@@ -16,6 +16,6 @@ class MusicService:
             pix = page.get_pixmap()
             img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
             return img
-        except Exception as e:
+        except (RuntimeError, ValueError, FileNotFoundError) as e:
             print(f"Error loading music score image: {e}")
             return None

@@ -14,7 +14,8 @@ class UserService:
         self._user_repository = user_repository
 
     def login(self, username, password):
-        """Tarkistaa kirjautumisessa käyttäjätiedot ja nostaa InvalidCredentialsError virhetilanteessa"""
+        """Tarkistaa kirjautumisessa käyttäjätiedot ja nostaa 
+        InvalidCredentialsError virhetilanteessa"""
         user = self._user_repository.find_user_by_username(username)
 
         if not user or user.password != password:
