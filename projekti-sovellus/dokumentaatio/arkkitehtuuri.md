@@ -134,3 +134,17 @@ Käyttäjä voi lisätä näytelmä- sekä musikaaliprojekteja sovellukseen klik
     ProjectService-->>MainView: return created project
     MainView->>MainView: show_projects_view()
 ```
+
+## Ohjelmaan jääneet heikkoudet
+
+### Käyttöliittymä
+
+Graafinen käyttöliittymä koostuu useista eri luokista ja tiedostoista, jotka mahdollistavat sovelluksen toiminnallisuuden. Mikäli sovellusta olisi vielä edistetty, tiedostojen välisestä kommunikoinnista olisi tullut helposti epäselviä. Käyttöliittymässä on myös jonkun verran toistoa, mikä lisää virheiden riskiä.
+
+### Suuret tietomäärät
+
+Käyttöliittymässä suuri määrä dataa tekee sovelluksesta helposti haastavan. Sovelluksessa ei ole filtteröinti tai haku mahdollisuutta, joten suurten tietomäärien käsittely ei ole käyttäjän kannalta sujuvaa. Sovelluksessa ei ole sivutustoimintoa, joten projektit, päivämäärät ja PDF-tiedostot muodostavat pitkän listan.
+
+### Sovelluksen alustus
+
+Sovelluksen käyttöönotto edellyttää komennon _poetry run invoke build_ tai sovellus ei ole käyttökelpoinen. Komento muodostaa sovellukselle tietokantayhteyden ja alustaa tarvittavat tietokantataulut. Sovellusta ei ole mahdollista käyttää ilman tietokantaa. Komennon tärkeyttä on korostettu monessa eri kohdassa sovelluksen dokumentaatiossa, mutta mikäli se silti jää käyttäjältä huomioimatta, ei sovellusta saada toimimaan ollenkaan. Tällöin sovellus antaa virheilmoituksen, mutta ei selkeää ohjausta ongelman korjaamiselle. Tämä heikentää käyttöönoton sujuvuutta ja käyttäjän käyttökokemusta.

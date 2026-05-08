@@ -16,5 +16,8 @@
 | 23.4. | 3h   | tietokanta toiminnallisuuden parantelu, erillisen tietokannan lisääminen testeille, uusien testien lisääminen |
 | 24.4. | 5h   | datetime-kirjaston lisääminen koodiin, tärkeiden päivämäärien toiminnallisuus sovellukseen |
 | 28.4. | 6h   | PDF-tiedostojen lisääminen sovellukseen, erillisen musiikkinäkymän sekä nuottinäkymän lisääminen |
+| 5.5. | 2h   | pylint korjausten viimeistely ja uusien testien lisääminen |
+| 8.5. | 1h   | sovelluslogiikan poistaminen käyttöliittymästä, koodin laadun tarkistus |
+| 9.5. | 2h   | sovelluksen viimeistely, viimeisten testien lisääminen |
 
 __Yhteensä käytetty aika:__ 43 tuntia

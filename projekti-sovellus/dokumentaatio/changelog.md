@@ -26,3 +26,8 @@
 - Käyttäjä pystyy lisäämään projektiin nuotteja (PDF-tiedostoina).
 - Lisätty erillinen tietokanta testeille.
 - Aloitettu docstring-dokumentaation lisäys koodiin.
+
+## Viikko 7
+- Viimeistelty sovelluksen toiminnallisuus ja testit.
+- Luotu lopullinen release ohjelmalle.
+- Tarkistettu sovelluksen toimivuus virtuaalityöasemassa.
