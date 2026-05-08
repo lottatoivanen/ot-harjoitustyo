@@ -31,3 +31,4 @@
 - Viimeistelty sovelluksen toiminnallisuus ja testit.
 - Luotu lopullinen release ohjelmalle.
 - Tarkistettu sovelluksen toimivuus virtuaalityöasemassa.
+- Siirretty sovelluslogiikka käyttöjärjestelmästä palveluluokkiin.
